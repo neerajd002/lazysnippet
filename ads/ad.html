@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expandable Ad</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <style id="adStyles">
+        :root {
+            --max-z-index: 2147483647;
+            --text-color: #fff;
+            --border-color: #1b4352;
+            --icon-color: #fff;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            color: var(--text-color);
+            /* background-color: #0d1d23; */
+            background-image: radial-gradient(#0d1d23, #1b4352);
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .ad-container {
+            position: relative;
+            width: inherit;
+            height: inherit;
+        }
+        .ad-container  > * {
+            position: absolute;
+        }
+        button {
+            font-weight: bold;
+            text-align: center;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            background-color: #2e647c;
+            cursor: pointer;
+        }
+        button:hover {
+            opacity: 0.7;
+        }
+        .close-ad {
+            top: 12px;
+            right: 12px;
+            width: 20px;
+            height: 20px;
+            padding: 5px;
+            font-size: 20px;
+            line-height: 20px;
+            text-align: center;
+            border: 1px solid var(--icon-color);
+            border-radius: 50%;
+        }
+        .close-ad:hover {
+            opacity: 0.7;
+        }
+        .ad-border {
+            width: inherit;
+            height: inherit;
+            border: 1px solid #1b4352;
+            box-sizing: border-box;
+            pointer-events: none;
+        }
+        .overlay {
+            top: 0;
+            left: 0;
+            width: inherit;
+            height: inherit;
+            background-color: #fff;
+        }
+    </style>
+    <style id="expandedStyles">
+        :root {
+            --radial-percentage-1: 0%;
+            --radial-percentage-2: 100%;
+            --radial-opacity: 100%;
+        }
+        body {
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(#0d1d23 var(--radial-percentage-1), rgb(27 67 82 / var(--radial-opacity)) var(--radial-percentage-2));
+        }
+        #acunexusExpandedAd {
+            width: 1382px;
+            height: 730px;
+            display: none;
+        }
+        #logo {
+            top: 35px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        #title {
+            top: 143px;
+            left: 50%;
+            width: 768px;
+            height: 50px;
+            font-size: 36px;
+            font-style: italic;
+            font-weight: bold;
+            text-align: center;
+            transform: translateX(-50%);
+        }
+        #subtitle {
+            top: 195px;
+            left: 50%;
+            width: 700px;
+            height: 40px;
+            font-size: 20px;
+            line-height: 1.2;
+            text-align: center;
+            transform: translateX(-50%);
+        }
+        #processImage {
+            bottom: 0;
+            width: inherit;
+        }
+        #processImage img {
+            width: 100%;
+        }
+    </style>
+    <style id="bannerStyles">
+        body {
+            width: 300px;
+            height: 250px;
+        }
+        #logo {
+            top: 20px;
+            left: 20px;
+            width: 80px;
+        }
+        #logo img { width: inherit; }
+        #title {
+            top: 92px;
+            left: 20px;
+            width: 260px;
+            height: 30px;
+            font-size: 22px;
+            text-transform: uppercase;
+            font-style: italic;
+            font-weight: bold;
+            text-align: center;
+        }
+        #subtitle {
+            top: 150px;
+            left: 20px;
+            width: 260px;
+            height: 24px;
+            font-size: 16px;
+            text-align: center;
+        }
+        button {
+            bottom: 24px;
+            left: 90px;
+            width: 120px;
+            height: 30px;
+        }
+    </style>
+    <script>
+        const getElement = (selector) => document.querySelector(selector)
+        const setStyles = (elements, styles) => elements.forEach((element) => Object.assign(element.style, styles))
+        const fireEvent = (url) => { (new Image()).src = url }
+    </script>
+</head>
+<body>
+    <div id="banner" class="ad-container">
+        <div id="logo"><img src="./logo.png" /></div>
+        <div id="title">Your programmatic deserves better ai</div>
+        <div id="subtitle">Let's reimagine it together</div>
+        <button id="expandButton">Explore more</button>
+        <div class="ad-border"></div>
+        <div class="overlay"></div>
+    </div>
+    <div id="expand" class="ad-container">
+        <div id="logo"><img src="./logo.png" /></div>
+        <div id="title">Driving Innovation Where It's Needed Most</div>
+        <div id="subtitle">A unified platform where media intelligence, creative innovation, and<br>AI-powered delivery come together to drive impactful storytelling</div>
+        <div id="processImage"><img src="./process-flow.png" /></div>
+        <div class="close-ad">✕</div>
+        <div class="ad-border"></div>
+        <!-- <div class="overlay"></div> -->
+    </div>
+    <script>
+        let iframeWrapper, iframeContainer, iframe;
+        let expandedAnimation;
+        const closeAd = () => {
+            expandedAnimation.progress(1);
+            iframeContainer.style.visibility = 'hidden';
+        }
+        const loadAd = () => {
+            fireEvent('1x1.png?imp=expandableAd');
+            console.log('ad loaded');
+            iframeWrapper = document.createElement('div');
+            setStyles([iframeWrapper], {
+                overflow: 'auto'
+            });
+            iframeContainer = document.createElement('div');
+            iframeContainer.id = 'acunexusExpandedAd';
+            setStyles([iframeContainer], {
+                position: 'fixed',
+                top: 0,
+                left: 0,
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                width: '100vw',
+                height: '100vh',
+                // background: '#1616165c',
+                zindex: 2147483647
+            })
+            /*
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            */
+            iframeContainer.style.visibility = 'hidden';
+            const expandContainer = getElement('#expand');
+            iframe = document.createElement('iframe');
+            setStyles([iframe], {
+                width: '1382px',
+                height: '730px',
+                // background: 'white',
+                // border: '1px solid'
+            });
+            iframeWrapper.appendChild(iframe)
+            iframeContainer.appendChild(iframeWrapper);
+            window.top.document.body.appendChild(iframeContainer);
+            iframe.contentWindow.document.open();
+            iframe.contentWindow.document.write(expandContainer.outerHTML);
+            iframe.contentWindow.document.close();
+            iframe.onload = () => {
+                iframe.contentWindow.document.head.appendChild(getElement('#adStyles').cloneNode(true))
+                iframe.contentWindow.document.head.appendChild(getElement('#expandedStyles'))
+                iframe.contentWindow.document.body.tabIndex = 0
+                iframe.contentWindow.document.querySelector('.close-ad').onclick = closeAd;
+                iframeContainer.onclick = closeAd;
+                iframe.contentWindow.document.onkeydown = function(e) {
+                    if(e.key === 'Escape') closeAd();
+                };
+                iframe.contentWindow.document.body.onclick = function(event) {
+                    if(event.target.classList.contains('close-ad')) {} else {
+                        const clickUrl = 'http://acunexus.com/';
+                        fireEvent(`1x1.png?click=${encodeURI(clickUrl)}`);
+                        window.open(clickUrl, '_blank');
+                    }
+                }
+            }
+            animateBanner();
+        }
+        const animateBanner = () => {
+            gsap.timeline({defaults: {ease: "power2.Out", duration:0.7}})
+            .to('#banner .overlay', { autoAlpha: 0, delay: 1 })
+            .from('#banner #logo', { autoAlpha: 0 })
+            .from('#banner #logo', { top: 110, left: 110, delay: 0.5 })
+            .from('#banner #title', { y: '+=100%', autoAlpha: 0 })
+            .from('#banner #subtitle', { y: '+=100%', autoAlpha: 0 })
+            .from('#banner #expandButton', { autoAlpha: 0 })
+        }
+        const animateExpanded = () => {
+            const el = (selector) => iframe.contentWindow.document.querySelector(selector);
+            expandedAnimation = gsap.timeline({defaults: {ease: "power2.Out", duration:0.7}})
+            .from(el('body'), { autoAlpha: 0 }, 'initial')
+            .from(el('#expand #logo'), { autoAlpha: 0 }, 'initial')
+            .from(el('body'), { '--radial-percentage-1': '10%', '--radial-opacity': '0%', '--radial-percentage-2': '10%', duration: 0.3 }, 'start')
+            .from(el('#expand #logo'), { top: 341 }, 'start')
+            .from(el('#expand .ad-border'), { autoAlpha: 0, duration: 0.01 })
+            .from(el('#expand .close-ad'), { autoAlpha: 0 })
+            .from(el('#expand #title'), { y: '+=100%', autoAlpha: 0 })
+            .from(el('#expand #subtitle'), { y: '+=100%', autoAlpha: 0 })
+            .from(el('#expand #processImage'), { autoAlpha: 0 })
+        }
+        getElement('#banner').onclick = function(event) {
+            if(event.target.id === 'expandButton') {} else {
+                const clickUrl = 'http://acunexus.com/';
+                fireEvent(`1x1.png?click=${encodeURI(clickUrl)}`);
+                window.open(clickUrl, '_blank');
+            }
+        }
+        getElement('#expandButton').onclick = function() {
+            iframeContainer.style.visibility = '';
+            iframe.contentWindow.document.body.focus();
+            if(expandedAnimation) {
+                expandedAnimation.restart();
+            } else {
+                animateExpanded();
+            }
+        };
+        window.onload = loadAd;
+    </script>
+</body>
+</html>
