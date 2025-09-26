@@ -256,6 +256,17 @@ acunx.expand.element.onkeydown = function(e) {
 let expandedAnimation;
 const trackingUrl = 'https://www.lazysnippet.com/ads/1x1.png';
 
+const status_update = (status, data) => {
+    console.log(status, data);
+    if(status == "expanded") { } 
+    else if (status == "geom-update") {
+        // update viewability
+    }
+}
+
+if(isSafeFrame()) {
+    $sf.ext.register(acunx.banner.width, acunx.banner.height, status_update);
+}
 const animateBanner = () => {
     gsap.timeline({defaults: {ease: "power2.Out", duration:0.7}})
     .to('#banner .overlay', { autoAlpha: 0, delay: 1 })
