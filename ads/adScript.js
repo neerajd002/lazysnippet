@@ -4,6 +4,9 @@ const fireEvent = (url) => { (new Image()).src = url }
 const hide = (element) => { element.style.opacity = 0; element.style.visibility = 'hidden'; }
 const show = (element) => { element.style.opacity = 1; element.style.visibility = 'visible'; }
 
+const EXPANDED = "expanded";
+const COLLAPSED = "collapsed";
+
 function isSafeFrame() {
     try {
         return typeof $sf !== 'undefined' && $sf.ext;
@@ -26,6 +29,11 @@ adContainer.innerHTML = `
         body {
             margin: 0;
             padding: 0;
+        }
+        #acunX {
+            width: 100%;
+            height: 100vh;
+            background-color: #00000040;
         }
         .ad-wrapper {
             position: relative;
@@ -262,6 +270,10 @@ const status_update = (status, data) => {
     if(status == "expanded") { } 
     else if (status == "geom-update") {
         // update viewability
+        if($sf.ext.status() == EXPANDED) {
+            console.log('AcunX Ad updated');
+            $sf.ext.expand($sf.ext.geom().exp);
+        }
     }
 }
 
