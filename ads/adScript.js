@@ -30,7 +30,7 @@ adContainer.innerHTML = `
             margin: 0;
             padding: 0;
         }
-        #acunX {
+        #acunx {
             width: 100%;
             height: 100vh;
             background-color: #00000040;
@@ -243,6 +243,7 @@ const acunx = {
         //     push: false
         // };
         // $sf.ext.expand(expansionParams);
+        console.log('AcunX Ad - ', $sf.ext.geom());
         $sf.ext.expand($sf.ext.geom().exp);
     },
     collapseAd: () => {
@@ -266,12 +267,13 @@ let expandedAnimation;
 const trackingUrl = 'https://www.lazysnippet.com/ads/1x1.png';
 
 const status_update = (status, data) => {
-    console.log(status, data);
+    console.log('AcunX Ad - ', status, data);
     if(status == "expanded") { } 
     else if (status == "geom-update") {
         // update viewability
         if($sf.ext.status() == EXPANDED) {
-            console.log('AcunX Ad updated');
+            console.log('AcunX Ad - ' + ' updated');
+            console.log('AcunX Ad - ', $sf.ext.geom());
             $sf.ext.expand($sf.ext.geom().exp);
         }
     }
