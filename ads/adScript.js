@@ -33,7 +33,7 @@ adContainer.innerHTML = `
         #acunx {
             width: 100% !important;
             height: 100vh !important;
-            background-color: #00000040;
+            /* background-color: #00000040; */
         }
         .ad-wrapper {
             position: relative;
