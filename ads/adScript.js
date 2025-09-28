@@ -227,14 +227,15 @@ const acunx = {
             console.log("Not in SafeFrame, collapse disabled.");
             return;
         }
-        const expansionParams = {
-            l: -(acunx.expand.width - acunx.banner.width), 
-            t: -(acunx.expand.height - acunx.banner.height),
-            r: 0,
-            b: 0,
-            push: false
-        };
-        $sf.ext.expand(expansionParams);
+        // const expansionParams = {
+        //     l: -(acunx.expand.width - acunx.banner.width), 
+        //     t: -(acunx.expand.height - acunx.banner.height),
+        //     r: 0,
+        //     b: 0,
+        //     push: false
+        // };
+        // $sf.ext.expand(expansionParams);
+        $sf.ext.expand($sf.ext.geom().exp);
     },
     collapseAd: () => {
         acunx.banner.element.focus();
