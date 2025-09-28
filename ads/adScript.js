@@ -31,8 +31,8 @@ adContainer.innerHTML = `
             padding: 0;
         }
         #acunx {
-            width: 100%;
-            height: 100vh;
+            width: 100% !important;
+            height: 100vh !important;
             background-color: #00000040;
         }
         .ad-wrapper {
@@ -214,7 +214,7 @@ const acunx = {
     banner: { 
         width: 300, 
         height: 250,
-        element: document.querySelector('#expand')
+        element: document.querySelector('#banner')
     },
     expand: { 
         width: 1382, 
