@@ -1,8 +1,8 @@
 const getElement = (selector) => document.querySelector(selector)
 const setStyles = (elements, styles) => elements.forEach((element) => Object.assign(element.style, styles))
 const fireEvent = (url) => { (new Image()).src = url }
-const hide = (element) => { element.style.opacity = 0; element.style.visibility = 'hidden'; }
-const show = (element) => { element.style.opacity = 1; element.style.visibility = 'visible'; }
+const hide = (element) => { element.style.display = 'none'; }
+const show = (element) => { element.style.display = ''; }
 
 const EXPANDED = "expanded";
 const COLLAPSED = "collapsed";
@@ -30,22 +30,17 @@ adContainer.innerHTML = `
             margin: 0;
             padding: 0;
         }
-        #acunx {
-            width: 100% !important;
-            height: 100vh !important;
-            /* background-color: #00000040; */
-        }
         .ad-wrapper {
-            position: relative;
-            width: inherit;
-            height: inherit;
+            position: fixed;
+            width: 100%;
+            height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
         }
         .ad-container {
-            position: absolute;
+            position: relative;
             top: 0;
             left: 0;
             width: 100%;
@@ -292,7 +287,6 @@ const animateBanner = () => {
     .from('#banner #expandButton', { autoAlpha: 0 })
 }
 const animateExpanded = () => {
-    gsap.set('#expand', { autoAlpha: 1 })
     expandedAnimation = gsap.timeline({defaults: {ease: "power2.Out", duration:0.7}})
     .from('#expand', { autoAlpha: 0 }, 'initial')
     .from('#expand #logo', { autoAlpha: 0 }, 'initial')
