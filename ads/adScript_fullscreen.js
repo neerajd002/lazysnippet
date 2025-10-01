@@ -32,8 +32,6 @@ adContainer.innerHTML = `
         }
         .ad-wrapper {
             position: fixed;
-            top: 0;
-            left: 0;
             width: 100%;
             height: 100vh;
             display: flex;
@@ -142,35 +140,35 @@ adContainer.innerHTML = `
     </style>
     <style id="expandedStyles">
         #expand {
-            width: 970px;
-            height: 500px;
+            width: 1382px;
+            height: 730px;
             background-image: radial-gradient(#0d1d23 var(--radial-percentage-1), rgb(27 67 82 / var(--radial-opacity)) var(--radial-percentage-2));
             color: var(--text-color);
             font-family: Arial, Helvetica, sans-serif;
             cursor: pointer;
         }
         #expand #logo {
-            top: 18px;
+            top: 35px;
             left: 50%;
             transform: translateX(-50%);
         }
         #expand #title {
-            top: 85px;
+            top: 143px;
             left: 50%;
             width: 768px;
             height: 50px;
-            font-size: 32px;
+            font-size: 36px;
             font-style: italic;
             font-weight: bold;
             text-align: center;
             transform: translateX(-50%);
         }
         #expand #subtitle {
-            top: 133px;
+            top: 195px;
             left: 50%;
             width: 700px;
             height: 40px;
-            font-size: 18px;
+            font-size: 20px;
             line-height: 1.2;
             text-align: center;
             transform: translateX(-50%);
@@ -178,8 +176,6 @@ adContainer.innerHTML = `
         #expand #processImage {
             bottom: 0;
             width: inherit;
-            padding: 0 30px;
-            box-sizing: border-box;
         }
         #expand #processImage img {
             width: 100%;
@@ -216,8 +212,8 @@ const acunx = {
         element: document.querySelector('#banner')
     },
     expand: { 
-        width: 970, 
-        height: 500,
+        width: 1382, 
+        height: 730,
         element: document.querySelector('#expand')
     },
     expandAd: () => {
@@ -234,7 +230,6 @@ const acunx = {
             console.log("Not in SafeFrame, collapse disabled.");
             return;
         }
-        acunx.expandUpdate();
         // const expansionParams = {
         //     l: -(acunx.expand.width - acunx.banner.width), 
         //     t: -(acunx.expand.height - acunx.banner.height),
@@ -243,31 +238,8 @@ const acunx = {
         //     push: false
         // };
         // $sf.ext.expand(expansionParams);
-        
-
-        
-    },
-    expandUpdate: () => {
-        const geom = $sf.ext.geom();
-        const { w:windowWidth, h:windowHeight } = geom.win;
-        console.log('AcunX Ad - geom ', geom);
-        console.log('AcunX Ad - dimension ', geom.exp);
-        console.log('AcunX Ad - required ', windowWidth, windowHeight);
-        const rowGutter = (windowWidth-acunx.expand.width)/2;
-        const columnGutter = (windowHeight-acunx.expand.height)/2;
-        const l = geom.exp.l - rowGutter;
-        const r = (acunx.expand.width - acunx.banner.width) - l;
-        const t = geom.exp.t - columnGutter;
-        const b = (acunx.expand.height - acunx.banner.height) - t;
-        $sf.ext.expand({ l, r, t, b, push: false });
-        
-        // $sf.ext.expand({
-        //     ...$sf.ext.geom().exp,
-        //     l: -(acunx.expand.width - acunx.banner.width), 
-        //     t: -(acunx.expand.height - acunx.banner.height),
-        //     r: 0,
-        //     b: 0,
-        // });
+        console.log('AcunX Ad - ', $sf.ext.geom());
+        $sf.ext.expand($sf.ext.geom().exp);
     },
     collapseAd: () => {
         acunx.banner.element.focus();
@@ -296,7 +268,8 @@ const status_update = (status, data) => {
         // update viewability
         if($sf.ext.status() == EXPANDED) {
             console.log('AcunX Ad - ' + ' updated');
-            // acunx.expandUpdate();
+            console.log('AcunX Ad - ', $sf.ext.geom());
+            $sf.ext.expand($sf.ext.geom().exp);
         }
     }
 }
@@ -317,8 +290,8 @@ const animateExpanded = () => {
     expandedAnimation = gsap.timeline({defaults: {ease: "power2.Out", duration:0.7}})
     .from('#expand', { autoAlpha: 0 }, 'initial')
     .from('#expand #logo', { autoAlpha: 0 }, 'initial')
-    .from('#expand', { '--radial-percentage-1': '15%', '--radial-opacity': '0%', '--radial-percentage-2': '15%', duration: 0.3 }, 'start')
-    .from('#expand #logo', { top: 225 }, 'start')
+    .from('#expand', { '--radial-percentage-1': '10%', '--radial-opacity': '0%', '--radial-percentage-2': '10%', duration: 0.3 }, 'start')
+    .from('#expand #logo', { top: 341 }, 'start')
     .from('#expand .ad-border', { autoAlpha: 0, duration: 0.01 })
     .from('#expand .close-ad', { autoAlpha: 0 })
     .from('#expand #title', { y: '+=100%', autoAlpha: 0 })
