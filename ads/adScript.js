@@ -264,13 +264,13 @@ const acunx = {
         const t = geom.exp.t - columnGutter;
         const b = (acunx.expand.height - acunx.banner.height) - t;
         // $sf.ext.expand({ ...geom.exp, l, r, t, b });
-        console.log('AcunX Ad - expand ', { 
-            ...geom.exp, 
-            l: 0, 
-            r: acunx.expand.width - acunx.banner.width, 
-            t: 0, 
-            b: acunx.expand.height - acunx.banner.height 
-        });
+        // console.log('AcunX Ad - expand ', { 
+        //     ...geom.exp, 
+        //     l: 0, 
+        //     r: acunx.expand.width - acunx.banner.width, 
+        //     t: 0, 
+        //     b: acunx.expand.height - acunx.banner.height 
+        // });
         $sf.ext.expand(geom.exp);
         
         // $sf.ext.expand({
@@ -308,7 +308,7 @@ const status_update = (status, data) => {
         // update viewability
         if($sf.ext.status() == EXPANDED) {
             console.log('AcunX Ad - ' + ' updated');
-            // acunx.expandUpdate();
+            acunx.expandUpdate();
         }
     }
 }
