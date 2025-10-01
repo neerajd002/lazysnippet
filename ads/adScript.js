@@ -263,7 +263,14 @@ const acunx = {
         const r = (acunx.expand.width - acunx.banner.width) - l;
         const t = geom.exp.t - columnGutter;
         const b = (acunx.expand.height - acunx.banner.height) - t;
-        $sf.ext.expand({ ...geom.exp, l, r, t, b });
+        // $sf.ext.expand({ ...geom.exp, l, r, t, b });
+        $sf.ext.expand({ 
+            ...geom.exp, 
+            l: 0, 
+            r: acunx.expand.width - acunx.banner.width, 
+            t: 0, 
+            b: acunx.expand.height - acunx.banner.height 
+        });
         
         // $sf.ext.expand({
         //     ...$sf.ext.geom().exp,
