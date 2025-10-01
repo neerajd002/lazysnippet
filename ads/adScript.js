@@ -271,7 +271,7 @@ const acunx = {
         //     t: 0, 
         //     b: acunx.expand.height - acunx.banner.height 
         // });
-        $sf.ext.expand(geom.exp);
+        $sf.ext.expand({ ...geom.exp, xs: true, yx: true });
         
         // $sf.ext.expand({
         //     ...$sf.ext.geom().exp,
