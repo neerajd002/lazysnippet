@@ -234,7 +234,7 @@ const acunx = {
             console.log("Not in SafeFrame, collapse disabled.");
             return;
         }
-        acunx.expandUpdate();
+        // acunx.expandUpdate();
         // const expansionParams = {
         //     l: -(acunx.expand.width - acunx.banner.width), 
         //     t: -(acunx.expand.height - acunx.banner.height),
@@ -281,6 +281,10 @@ const acunx = {
         //     b: 0,
         // });
     },
+    requestExpansion: () => {
+        const geom = $sf.ext.geom();
+        $sf.ext.expand({ ...geom.exp });
+    },
     collapseAd: () => {
         acunx.banner.element.focus();
         expandedAnimation.progress(1);
@@ -303,7 +307,9 @@ const trackingUrl = 'https://www.lazysnippet.com/ads/1x1.png';
 
 const status_update = (status, data) => {
     console.log('AcunX Ad - ', status, data);
-    if(status == "expanded") { } 
+    if(status == "expanded") { 
+        acunx.expandAd();
+    } 
     else if (status == "geom-update") {
         // update viewability
         if($sf.ext.status() == EXPANDED) {
@@ -346,7 +352,7 @@ gsapScript.onload = function() {
 }
 
 acunx.element.onclick = function(event) {
-    if(event.target.id === 'expandButton') { acunx.expandAd(); } 
+    if(event.target.id === 'expandButton') { acunx.requestExpansion(); } 
     else if(event.target.classList.contains('close-ad')) { acunx.collapseAd(); } 
     else {
         const clickUrl = 'http://acunexus.com/';
