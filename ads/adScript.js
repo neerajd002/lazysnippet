@@ -249,7 +249,11 @@ const acunx = {
     },
     expandUpdate: () => {
         const geom = $sf.ext.geom();
-        const { w:windowWidth, h:windowHeight } = geom.win;
+        // const { w:windowWidth, h:windowHeight } = geom.win;
+        const adWidth = window.innerWidth;
+        const adHeight = window.innerHeight;
+        const windowWidth = geom.exp.l + adWidth + geom.exp.r;
+        const windowHeight = geom.exp.t + adHeight + geom.exp.b;
         console.log('AcunX Ad - geom ', geom);
         console.log('AcunX Ad - dimension ', geom.exp);
         console.log('AcunX Ad - required ', windowWidth, windowHeight);
@@ -259,7 +263,7 @@ const acunx = {
         const r = (acunx.expand.width - acunx.banner.width) - l;
         const t = geom.exp.t - columnGutter;
         const b = (acunx.expand.height - acunx.banner.height) - t;
-        $sf.ext.expand({ l, r, t, b, push: false });
+        $sf.ext.expand({ ...geom.exp, l, r, t, b });
         
         // $sf.ext.expand({
         //     ...$sf.ext.geom().exp,
