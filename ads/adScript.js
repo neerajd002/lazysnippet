@@ -271,13 +271,7 @@ const acunx = {
             t: 0, 
             b: acunx.expand.height - acunx.banner.height 
         });
-        $sf.ext.expand({ 
-            ...geom.exp, 
-            l: 0, 
-            r: acunx.expand.width - acunx.banner.width, 
-            t: 0, 
-            b: acunx.expand.height - acunx.banner.height 
-        });
+        $sf.ext.expand(geom.exp);
         
         // $sf.ext.expand({
         //     ...$sf.ext.geom().exp,
