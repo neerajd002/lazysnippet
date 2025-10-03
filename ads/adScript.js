@@ -149,6 +149,9 @@ adContainer.innerHTML = `
             font-family: Arial, Helvetica, sans-serif;
             cursor: pointer;
         }
+        #expand:focus {
+            background: red;
+        }
         #expand #logo {
             top: 18px;
             left: 50%;
