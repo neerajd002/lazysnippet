@@ -91,7 +91,7 @@ adContainer.innerHTML = `
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background-color: #00000080;
+            /* background-color: #00000080; */
         }
         .ad-container {
             position: relative;
