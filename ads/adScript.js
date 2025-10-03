@@ -366,7 +366,10 @@ let hasAdResized = false;
 const status_update = (status, data) => {
     console.log('AcunX Ad - ', status, data);
     if(status == EXPANDED) {
-        hasAdResized = false; 
+        if(hasAdResized) {
+            hasAdResized = false;
+            return; 
+        }
         acunx.expandAd();
     }  
     else if(status == COLLAPSED) { 
