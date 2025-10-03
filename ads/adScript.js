@@ -51,6 +51,7 @@ function enableScroll() {
 
 const EXPANDED = "expanded";
 const COLLAPSED = "collapsed";
+const GEOM_UPDATE = "geom-update";
 
 function isSafeFrame() {
     try {
@@ -361,19 +362,25 @@ acunx.expand.element.onkeydown = function(e) {
 let expandedAnimation;
 const trackingUrl = 'https://www.lazysnippet.com/ads/1x1.png';
 
+let hasAdResized = false;
 const status_update = (status, data) => {
     console.log('AcunX Ad - ', status, data);
-    if(status == EXPANDED) { 
+    if(status == EXPANDED) {
+        hasAdResized = false; 
         acunx.expandAd();
     }  
     else if(status == COLLAPSED) { 
+        if(hasAdResized) return acunx.requestExpansion();
         acunx.collapseAd();
     } 
-    else if (status == "geom-update") {
+    else if (status == GEOM_UPDATE) {
         // update viewability
         if($sf.ext.status() == EXPANDED) {
             console.log('AcunX Ad - ' + ' updated');
-            acunx.expandUpdate();
+            // acunx.expandUpdate();
+            hasAdResized = true;
+            acunx.requestCollapse();
+            // acunx.expandAd();
         }
     }
 }
