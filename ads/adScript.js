@@ -283,7 +283,7 @@ const acunx = {
     },
     requestExpansion: () => {
         const geom = $sf.ext.geom();
-        $sf.ext.expand({ r: -200, t: 100 });
+        $sf.ext.expand({ l: 100, r: -200, t: 100 });
         // $sf.ext.expand({ ...geom.exp });
     },
     collapseAd: () => {
