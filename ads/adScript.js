@@ -345,13 +345,12 @@ const acunx = {
         show(acunx.banner.element);
         hide(acunx.expand.element);
         acunx.expand.element.style.display = 'none';
+    },
+    requestCollapse: () => {
         if (!isSafeFrame()) {
             console.log("Not in SafeFrame, collapse disabled.");
             return;
         }
-        $sf.ext.collapse();
-    },
-    requestCollapse: () => {
         $sf.ext.collapse();
     },
 } 
