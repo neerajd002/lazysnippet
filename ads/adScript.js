@@ -387,6 +387,10 @@ const status_update = (status, data) => {
             // acunx.expandAd();
         }
     }
+    else if (status == "failed") {
+        acunx.requestCollapse();
+        hasAdResized = false
+    }
 }
 
 if(isSafeFrame()) {
