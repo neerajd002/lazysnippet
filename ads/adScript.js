@@ -234,7 +234,7 @@ const acunx = {
             console.log("Not in SafeFrame, collapse disabled.");
             return;
         }
-        acunx.expandUpdate();
+        // acunx.expandUpdate();
         // const expansionParams = {
         //     l: -(acunx.expand.width - acunx.banner.width), 
         //     t: -(acunx.expand.height - acunx.banner.height),
@@ -271,8 +271,7 @@ const acunx = {
         //     t: 0, 
         //     b: acunx.expand.height - acunx.banner.height 
         // });
-        // $sf.ext.expand(geom.exp);
-        $sf.ext.expand({ l: 200, t: 0 });
+        // $sf.ext.expand({ ...geom.exp });
         
         // $sf.ext.expand({
         //     ...$sf.ext.geom().exp,
@@ -281,6 +280,11 @@ const acunx = {
         //     r: 0,
         //     b: 0,
         // });
+    },
+    requestExpansion: () => {
+        const geom = $sf.ext.geom();
+        $sf.ext.expand({ l: 200, t: 0 });
+        // $sf.ext.expand({ ...geom.exp });
     },
     collapseAd: () => {
         acunx.banner.element.focus();
@@ -293,18 +297,26 @@ const acunx = {
             return;
         }
         $sf.ext.collapse();
-    }
+    },
+    requestCollapse: () => {
+        $sf.ext.collapse();
+    },
 } 
 hide(acunx.expand.element);
 acunx.expand.element.onkeydown = function(e) {
-    if(e.key === 'Escape') acunx.collapseAd();
+    if(e.key === 'Escape') acunx.requestCollapse();
 };
 let expandedAnimation;
 const trackingUrl = 'https://www.lazysnippet.com/ads/1x1.png';
 
 const status_update = (status, data) => {
     console.log('AcunX Ad - ', status, data);
-    if(status == "expanded") { } 
+    if(status == EXPANDED) { 
+        acunx.expandAd();
+    }  
+    else if(status == COLLAPSED) { 
+        acunx.collapseAd();
+    } 
     else if (status == "geom-update") {
         // update viewability
         if($sf.ext.status() == EXPANDED) {
@@ -347,8 +359,8 @@ gsapScript.onload = function() {
 }
 
 acunx.element.onclick = function(event) {
-    if(event.target.id === 'expandButton') { acunx.expandAd(); } 
-    else if(event.target.classList.contains('close-ad')) { acunx.collapseAd(); } 
+    if(event.target.id === 'expandButton') { acunx.requestExpansion(); } 
+    else if(event.target.classList.contains('close-ad')) { acunx.requestCollapse(); } 
     else {
         const clickUrl = 'http://acunexus.com/';
         fireEvent(`${trackingUrl}?click=${encodeURIComponent(clickUrl)}`);
