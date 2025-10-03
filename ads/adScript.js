@@ -423,7 +423,7 @@ gsapScript.onload = function() {
 
 acunx.element.onclick = function(event) {
     if(event.target.id === 'expandButton') { acunx.requestExpansion(); } 
-    if(event.target.classList.contains('ad-wrapper')) { acunx.requestCollapse(); } 
+    else if(event.target.classList.contains('ad-wrapper')) { acunx.requestCollapse(); } 
     else if(event.target.classList.contains('close-ad')) { acunx.requestCollapse(); } 
     else {
         const clickUrl = 'http://acunexus.com/';
