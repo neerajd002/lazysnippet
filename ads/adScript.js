@@ -4,6 +4,11 @@ const fireEvent = (url) => { (new Image()).src = url }
 const hide = (element) => { element.style.display = 'none'; }
 const show = (element) => { element.style.display = ''; }
 
+const commands = {
+    'exp-ovr': 'expand',
+    'collapse': 'collapse'
+}
+
 
 // left: 37, up: 38, right: 39, down: 40,
 // spacebar: 32, pageup: 33, pagedown: 34, end: 35, home: 36
@@ -195,9 +200,6 @@ adContainer.innerHTML = `
             color: var(--text-color);
             font-family: Arial, Helvetica, sans-serif;
             cursor: pointer;
-        }
-        #expand:focus {
-            background: red;
         }
         #expand #logo {
             top: 18px;
@@ -421,6 +423,7 @@ gsapScript.onload = function() {
 
 acunx.element.onclick = function(event) {
     if(event.target.id === 'expandButton') { acunx.requestExpansion(); } 
+    if(event.target.classList.contains('ad-wrapper')) { acunx.requestCollapse(); } 
     else if(event.target.classList.contains('close-ad')) { acunx.requestCollapse(); } 
     else {
         const clickUrl = 'http://acunexus.com/';
