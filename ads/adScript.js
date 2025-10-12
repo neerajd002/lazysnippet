@@ -347,8 +347,10 @@ const fileLoaded = () => {
     loadedFiles++;
     if(loadedFiles !== filesCount) return;
     gsap.registerPlugin(ScrollTrigger)
-    render();
-    animateBanner();
+    setTimeout(function() {
+        render();
+        animateBanner();
+    }, 1000);
 }
 const frameCount = 225;
 const currentFrame = (index) => `https://www.lazysnippet.com/ads/mobile-expandable/frames-webp/Frame_${index.toString().padStart(5, '0')}.webp`;
