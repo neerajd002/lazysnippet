@@ -300,7 +300,9 @@ const status_update = (status, data) => {
 if(isSafeFrame()) {
     $sf.ext.register(acunx.banner.width, acunx.banner.height, status_update);
     console.log('AcunX Ad - Ad load ', $sf.ext.geom());
-    
+    const geom = $sf.ext.geom()
+    acunx.expand.width = geom.win.w;
+    acunx.expand.height = geom.win.h;
 }
 const animateBanner = () => {
     // gsap.timeline({defaults: {ease: "power2.Out", duration:0.7}})
@@ -312,7 +314,7 @@ const animateBanner = () => {
         onUpdate: render,
         scrollTrigger: {
             trigger: "#scrollAdContent",
-            start: () => "-=" + 667,
+            start: () => "-=" + acunx.expand.height,
             scrub: 0.5,
             end: () => "+=" + document.querySelector("#scrollTopContent").offsetHeight
         },
@@ -343,8 +345,8 @@ fireEvent(`${trackingUrl}?imp=expandableAd`);
 
 const canvas = document.getElementById("images");
 const context = canvas.getContext("2d");
-canvas.width = 375;
-canvas.height = 667;
+canvas.width = acunx.expand.width;
+canvas.height = acunx.expand.height;
 const frames = { frame: 0 };
 
 const filesCount = 3;
