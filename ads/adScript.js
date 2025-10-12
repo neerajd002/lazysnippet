@@ -289,10 +289,11 @@ let expandedAnimation;
 const trackingUrl = 'https://www.lazysnippet.com/ads/1x1.png';
 
 let hasAdResized = false;
+let scrollExpansion = false
 const status_update = (status, data) => {
     const geom = $sf.ext.geom();
     const { self, win, exp } = geom;
-    console.log('AcunX Ad - status_update ', status, data, geom);
+    // console.log('AcunX Ad - status_update ', status, data, geom);
 
     if(status == EXPANDED) {
         if(hasAdResized) {
@@ -342,8 +343,8 @@ const animateBanner = () => {
         frame: 90,
         snap: "frame",
         onUpdate: () => {
-            render()
-            if(frames.frame > 70) {
+            if(!scrollExpansion && frames.frame > 70) {
+                scrollExpansion = true;
                 scrollAnimation.pause();
                 console.log('AcunX Ad - expansion');
                 setTimeout(() => {
@@ -351,12 +352,13 @@ const animateBanner = () => {
                 }, 100)
                 return
             }
+            render()
         },
         scrollTrigger: {
             trigger: "#scrollAdContent",
             start: () => "-=" + (acunx.expand.height - acunx.banner.height),
             scrub: 0.5,
-            end: () => "+=" + (document.querySelector("#scrollTopContent").offsetHeight - acunx.banner.height)
+            end: () => "+=" + acunx.expand.height
         },
         ease: "none"
     });
