@@ -267,7 +267,7 @@ const acunx = {
     collapseAd: () => {
         adScroll.enable();
         adContainer.dataset.ad = COLLAPSED;
-        scrollAnimation.restart();
+        // scrollAnimation.restart();
         // acunx.banner.element.focus();
         // expandedAnimation.progress(1);
         // show(acunx.banner.element);
@@ -347,7 +347,7 @@ const animateBanner = () => {
         onUpdate: () => {
             if(!scrollExpansion && frames.frame > 70) {
                 scrollExpansion = true;
-                scrollAnimation.pause();
+                // scrollAnimation.pause();
                 console.log('AcunX Ad - expansion');
                 setTimeout(() => {
                     acunx.requestExpansion();
