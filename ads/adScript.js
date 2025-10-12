@@ -358,7 +358,7 @@ const animateBanner = () => {
             trigger: "#scrollAdContent",
             start: () => "-=" + (acunx.expand.height - acunx.banner.height),
             scrub: 0.5,
-            end: () => "+=" + acunx.expand.height
+            end: () => "+=" + (acunx.expand.height - acunx.banner.height)
         },
         ease: "none"
     });
