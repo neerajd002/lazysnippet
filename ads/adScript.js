@@ -360,6 +360,7 @@ for (let i = 0; i < frameCount; i++) {
 }
 images[0].onload = () => {
     fileLoaded();
+    debugger
     render();
 };
 addScript(acunx.element, 'https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js', fileLoaded);
