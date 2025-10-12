@@ -192,19 +192,21 @@ adContainer.innerHTML = `
     <div class="ad-wrapper">
         <div class="ad-container" tabindex="0">
             <canvas id="images"></canvas>
-            <div id="scrollWrapper">
-                <div id="scroller">
-                    <div id="scrollTopContent"></div>
-                    <div id="scrollAdContent"></div>
-                    <div id="scrollBottomContent"></div>
-                </div>
-            </div>
             <div class="overlay"></div>
         </div>
     </div>
 `;
 const adElement = document.querySelector("#acunx")
 adElement.appendChild(adContainer)
+
+const scrollWrapper = document.createElement('div');
+scrollWrapper.id = 'scrollWrapper';
+scrollWrapper.innerHTML = `<div id="scroller">
+                    <div id="scrollTopContent"></div>
+                    <div id="scrollAdContent"></div>
+                    <div id="scrollBottomContent"></div>
+                </div>`;
+document.body.appendChild(scrollWrapper);
 
 const acunx = {
     element: adElement,
