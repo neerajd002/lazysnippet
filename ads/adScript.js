@@ -176,8 +176,8 @@ adContainer.innerHTML = `
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 100%;
-            height: 100vh;
+            /* width: 100%;
+            height: 100vh; */ 
         }
         #scrollTopContent {
             height: 1000px;
