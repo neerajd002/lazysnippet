@@ -266,6 +266,7 @@ const acunx = {
     collapseAd: () => {
         adScroll.enable();
         adContainer.dataset.ad = COLLAPSED;
+        scrollAnimation && scrollAnimation.play();
         // acunx.banner.element.focus();
         // expandedAnimation.progress(1);
         // show(acunx.banner.element);
@@ -343,13 +344,11 @@ const animateBanner = () => {
         onUpdate: () => {
             render()
             if(frames.frame > 70) {
-                scrollAnimation.kill();
-                console.log('AcunX Ad - expand');
-                
+                scrollAnimation.pause();
+                console.log('AcunX Ad - expansion');
                 setTimeout(() => {
-
                     acunx.requestExpansion();
-                }, 500)
+                }, 100)
                 return
             }
         },
@@ -358,7 +357,7 @@ const animateBanner = () => {
             trigger: "#scrollAdContent",
             start: () => "-=" + acunx.expand.height,
             scrub: 0.5,
-            end: () => "+=" + document.querySelector("#scrollTopContent").offsetHeight
+            end: () => "+=" + (document.querySelector("#scrollTopContent").offsetHeight - acunx.banner.height)
         },
         ease: "none"
     });
