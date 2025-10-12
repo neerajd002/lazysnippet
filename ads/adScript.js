@@ -256,10 +256,10 @@ const acunx = {
         $sf.ext.collapse();
     },
 } 
-hide(acunx.expand.element);
-acunx.expand.element.onkeydown = function(e) {
-    if(e.key === 'Escape') acunx.requestCollapse();
-};
+// hide(acunx.expand.element);
+// acunx.expand.element.onkeydown = function(e) {
+//     if(e.key === 'Escape') acunx.requestCollapse();
+// };
 let expandedAnimation;
 const trackingUrl = 'https://www.lazysnippet.com/ads/1x1.png';
 
