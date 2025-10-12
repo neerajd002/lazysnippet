@@ -300,8 +300,9 @@ if(isSafeFrame()) {
     $sf.ext.register(acunx.banner.width, acunx.banner.height, status_update);
 }
 const animateBanner = () => {
-    gsap.timeline({defaults: {ease: "power2.Out", duration:0.7}})
-    .to('.overlay', { autoAlpha: 0, delay: 1 })
+    // gsap.timeline({defaults: {ease: "power2.Out", duration:0.7}})
+    gsap.to('.overlay', { autoAlpha: 0, delay: 1, ease: "power2.Out", duration: 0.7 });
+    console.log('AcunX Ad - Animate Banner');
     gsap.to(frames, {
         frame: 90,
         snap: "frame",
