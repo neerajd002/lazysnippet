@@ -269,8 +269,10 @@ const trackingUrl = 'https://www.lazysnippet.com/ads/1x1.png';
 
 let hasAdResized = false;
 const status_update = (status, data) => {
-    console.log('AcunX Ad - ', status, data);
-    console.log('AcunX Ad - status_update ', status, data, $sf.ext.geom());
+    const geom = $sf.ext.geom();
+    const { self, win, exp } = geom;
+    console.log('AcunX Ad - status_update ', status, data, geom);
+
     if(status == EXPANDED) {
         if(hasAdResized) {
             hasAdResized = false;
@@ -281,11 +283,16 @@ const status_update = (status, data) => {
     else if(status == COLLAPSED) { 
         if(hasAdResized) return acunx.requestExpansion();
         acunx.collapseAd();
+        if(exp.t) {
+            document.documentElement.scrollTop = self.t - exp.t;
+        } else if(exp.b) {
+            document.documentElement.scrollTop = self.b - (win.h - exp.b);
+        }
+
     } 
     else if (status == GEOM_UPDATE) {
         // update viewability
         if($sf.ext.status() == EXPANDED) {
-            console.log('AcunX Ad - ' + ' updated');
             hasAdResized = true;
             acunx.requestCollapse();
             // acunx.expandAd();
@@ -303,6 +310,7 @@ if(isSafeFrame()) {
     const geom = $sf.ext.geom()
     acunx.expand.width = geom.win.w;
     acunx.expand.height = geom.win.h;
+    document.querySelector('#scrollTopContent').style.height = geom.self.t + 'px';
 }
 const animateBanner = () => {
     // gsap.timeline({defaults: {ease: "power2.Out", duration:0.7}})
