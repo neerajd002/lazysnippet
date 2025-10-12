@@ -294,7 +294,7 @@ let scrollExpansion = false
 const status_update = (status, data) => {
     const geom = $sf.ext.geom();
     const { self, win, exp } = geom;
-    // console.log('AcunX Ad - status_update ', status, data, geom);
+    console.log('AcunX Ad - status_update ', status, data, geom);
 
     if(status == EXPANDED) {
         if(hasAdResized) {
