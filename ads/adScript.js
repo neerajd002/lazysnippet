@@ -76,6 +76,7 @@ function isSafeFrame() {
     }
 }
 const adContainer = document.createElement('div');
+adContainer.id = 'adContainer';
 adContainer.innerHTML = `
     <style id="adStyles">
         :root {
@@ -195,18 +196,18 @@ adContainer.innerHTML = `
             <div class="overlay"></div>
         </div>
     </div>
+    <div id="scrollWrapper">
+        <div id="scroller">
+            <div id="scrollTopContent"></div>
+            <div id="scrollAdContent"></div>
+            <div id="scrollBottomContent"></div>
+        </div>
+    </div>
 `;
 const adElement = document.querySelector("#acunx")
 adElement.appendChild(adContainer)
 
-const scrollWrapper = document.createElement('div');
-scrollWrapper.id = 'scrollWrapper';
-scrollWrapper.innerHTML = `<div id="scroller">
-                    <div id="scrollTopContent"></div>
-                    <div id="scrollAdContent"></div>
-                    <div id="scrollBottomContent"></div>
-                </div>`;
-document.body.appendChild(scrollWrapper);
+adElement.style.height = '';
 
 const acunx = {
     element: adElement,
