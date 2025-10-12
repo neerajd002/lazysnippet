@@ -340,6 +340,7 @@ const animateBanner = () => {
     // gsap.timeline({defaults: {ease: "power2.Out", duration:0.7}})
     gsap.to('.overlay', { autoAlpha: 0, delay: 1, ease: "power2.Out", duration: 0.7 });
     console.log('AcunX Ad - Animate Banner');
+    scrollAnimation && scrollAnimation.kill();
     scrollAnimation = gsap.to(frames, {
         frame: 90,
         snap: "frame",
@@ -359,7 +360,7 @@ const animateBanner = () => {
             trigger: "#scrollAdContent",
             start: () => "-=" + (acunx.expand.height - acunx.banner.height),
             scrub: 0.5,
-            end: () => "+=" + (acunx.expand.height - acunx.banner.height)
+            end: () => "+=" + (acunx.expand.height/2 - acunx.banner.height)
         },
         ease: "none"
     });
