@@ -352,10 +352,9 @@ const animateBanner = () => {
                 return
             }
         },
-        onComplete: () => acunx.requestExpansion(),
         scrollTrigger: {
             trigger: "#scrollAdContent",
-            start: () => "-=" + acunx.expand.height,
+            start: () => "-=" + (acunx.expand.height - acunx.banner.height),
             scrub: 0.5,
             end: () => "+=" + (document.querySelector("#scrollTopContent").offsetHeight - acunx.banner.height)
         },
