@@ -373,6 +373,8 @@ const animateExpanded = () => {
 fireEvent(`${trackingUrl}?imp=expandableAd`);
 
 const canvas = document.getElementById("images");
+canvas.width = acunx.expand.width;
+canvas.height = acunx.expand.height;
 const context = canvas.getContext("2d");
 const frames = { frame: 0 };
 
@@ -398,20 +400,38 @@ for (let i = 0; i < frameCount; i++) {
     images.push(img);
 }
 images[0].onload = function() {
-    debugger
-    imageNaturalWidth = this.naturalWidth;
-    imageNaturalHeight = this.naturalHeight;
-    canvas.width = imageNaturalWidth;
-    canvas.height = imageNaturalHeight;
     fileLoaded();
 };
 addScript(acunx.element, 'https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js', fileLoaded);
 addScript(acunx.element, 'https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js', fileLoaded);
 
+// function render() {
+//     console.log('AcunX Ad - Render ', canvas, images[frames.frame], frames.frame);
+//     context.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
+//     context.drawImage(images[frames.frame], 0, 0, canvas.offsetWidth, canvas.offsetHeight);
+// }
+
+let lastRendered = -1;
 function render() {
-    console.log('AcunX Ad - Render ', canvas, images[frames.frame], frames.frame);
-    context.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
-    context.drawImage(images[frames.frame], 0, 0, canvas.offsetWidth, canvas.offsetHeight);
+    const index = frames.frame;
+    if (index === lastRendered) return;
+
+    const img = images[index];
+    const naturalWidth = img.naturalWidth || img.width;
+    const naturalHeight = img.naturalHeight || img.height;
+    context.clearRect(0, 0, canvas.width, canvas.height);
+
+    const hRatio = canvas.width/naturalWidth;
+    const vRatio = canvas.height/naturalHeight;
+    const ratio = Math.min(hRatio, vRatio);
+    const dx = (canvas.width - naturalWidth * ratio)/2;
+    const dy = (canvas.height - naturalHeight * ratio)/2;
+    context.drawImage(
+        img, 0, 0, naturalWidth, naturalHeight,
+        dx, dy, naturalWidth * ratio, naturalHeight * ratio
+    );
+
+    lastRendered = index;
 }
 
 
