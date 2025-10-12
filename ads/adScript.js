@@ -133,7 +133,6 @@ adContainer.innerHTML = `
             background-color: #2e647ccc;
         }
         .close-ad {
-            display: none;
             top: 12px;
             right: 12px;
             width: 20px;
@@ -212,6 +211,7 @@ adElement.appendChild(adContainer)
 adElement.style.height = '';
 
 const closeAd = adElement.querySelector('.close-ad');
+hide(closeAd);
 const acunx = {
     element: adElement,
     banner: { 
