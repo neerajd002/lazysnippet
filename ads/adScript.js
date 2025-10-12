@@ -97,6 +97,7 @@ adContainer.innerHTML = `
         body {
             margin: 0;
             padding: 0;
+            background-color: #fff;
         }
         .ad-wrapper {
             position: fixed;
@@ -266,7 +267,7 @@ const acunx = {
     collapseAd: () => {
         adScroll.enable();
         adContainer.dataset.ad = COLLAPSED;
-        scrollAnimation && scrollAnimation.play();
+        animateBanner();
         // acunx.banner.element.focus();
         // expandedAnimation.progress(1);
         // show(acunx.banner.element);
