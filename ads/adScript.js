@@ -206,7 +206,7 @@ adContainer.innerHTML = `
     <div class="ad-wrapper">
         <div class="ad-container" tabindex="0">
             <canvas id="images"></canvas>
-            <button id="expandButton">expand</button>
+            <!-- <button id="expandButton">expand</button> -->
             <div class="close-ad">&#10005;</div>
             <div class="overlay"></div>
         </div>
@@ -360,7 +360,7 @@ const animateBanner = () => {
             trigger: "#scrollAdContent",
             start: () => "-=" + (acunx.expand.height - acunx.banner.height),
             scrub: 0.5,
-            end: () => "+=" + (acunx.expand.height*0.5 - acunx.banner.height)
+            end: () => "+=" + (acunx.expand.height*0.75 - acunx.banner.height)
         },
         ease: "none"
     });
