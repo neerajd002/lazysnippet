@@ -1,6 +1,12 @@
 const getElement = (selector) => document.querySelector(selector)
 const setStyles = (elements, styles) => elements.forEach((element) => Object.assign(element.style, styles))
 const fireEvent = (url) => { (new Image()).src = url }
+const addScript = (element, scriptUrl, callback) => {
+    const script = document.createElement('script');
+    script.src = scriptUrl;
+    element.appendChild(script);
+    script.onload = callback;
+}
 const hide = (element) => { element.style.display = 'none'; }
 const show = (element) => { element.style.display = ''; }
 
@@ -291,52 +297,9 @@ const acunx = {
             console.log("Not in SafeFrame, collapse disabled.");
             return;
         }
-        // acunx.expandUpdate();
-        // const expansionParams = {
-        //     l: -(acunx.expand.width - acunx.banner.width), 
-        //     t: -(acunx.expand.height - acunx.banner.height),
-        //     r: 0,
-        //     b: 0,
-        //     push: false
-        // };
-        // $sf.ext.expand(expansionParams);
         
 
         
-    },
-    expandUpdate: () => {
-        const geom = $sf.ext.geom();
-        // const { w:windowWidth, h:windowHeight } = geom.win;
-        const adWidth = window.innerWidth;
-        const adHeight = window.innerHeight;
-        const windowWidth = geom.exp.l + adWidth + geom.exp.r;
-        const windowHeight = geom.exp.t + adHeight + geom.exp.b;
-        console.log('AcunX Ad - geom ', geom);
-        console.log('AcunX Ad - dimension ', geom.exp);
-        console.log('AcunX Ad - required ', windowWidth, windowHeight);
-        const rowGutter = (windowWidth-acunx.expand.width)/2;
-        const columnGutter = (windowHeight-acunx.expand.height)/2;
-        const l = geom.exp.l - rowGutter;
-        const r = (acunx.expand.width - acunx.banner.width) - l;
-        const t = geom.exp.t - columnGutter;
-        const b = (acunx.expand.height - acunx.banner.height) - t;
-        // $sf.ext.expand({ ...geom.exp, l, r, t, b });
-        // console.log('AcunX Ad - expand ', { 
-        //     ...geom.exp, 
-        //     l: 0, 
-        //     r: acunx.expand.width - acunx.banner.width, 
-        //     t: 0, 
-        //     b: acunx.expand.height - acunx.banner.height 
-        // });
-        // $sf.ext.expand({ ...geom.exp });
-        
-        // $sf.ext.expand({
-        //     ...$sf.ext.geom().exp,
-        //     l: -(acunx.expand.width - acunx.banner.width), 
-        //     t: -(acunx.expand.height - acunx.banner.height),
-        //     r: 0,
-        //     b: 0,
-        // });
     },
     requestExpansion: () => {
         const geom = $sf.ext.geom();
@@ -386,7 +349,6 @@ const status_update = (status, data) => {
         // update viewability
         if($sf.ext.status() == EXPANDED) {
             console.log('AcunX Ad - ' + ' updated');
-            // acunx.expandUpdate();
             hasAdResized = true;
             acunx.requestCollapse();
             // acunx.expandAd();
@@ -402,33 +364,40 @@ if(isSafeFrame()) {
     $sf.ext.register(acunx.banner.width, acunx.banner.height, status_update);
 }
 const animateBanner = () => {
-    gsap.timeline({defaults: {ease: "power2.Out", duration:0.7}})
-    .to('#banner .overlay', { autoAlpha: 0, delay: 1 })
-    .from('#banner #logo', { autoAlpha: 0 })
-    .from('#banner #logo', { top: 110, left: 110, delay: 0.5 })
-    .from('#banner #title', { y: '+=100%', autoAlpha: 0 })
-    .from('#banner #subtitle', { y: '+=100%', autoAlpha: 0 })
-    .from('#banner #expandButton', { autoAlpha: 0 })
+    console.log("Ad Loaddeddddddddddddddddddd");
+    
+    // gsap.timeline({defaults: {ease: "power2.Out", duration:0.7}})
+    // .to('#banner .overlay', { autoAlpha: 0, delay: 1 })
+    // .from('#banner #logo', { autoAlpha: 0 })
+    // .from('#banner #logo', { top: 110, left: 110, delay: 0.5 })
+    // .from('#banner #title', { y: '+=100%', autoAlpha: 0 })
+    // .from('#banner #subtitle', { y: '+=100%', autoAlpha: 0 })
+    // .from('#banner #expandButton', { autoAlpha: 0 })
 }
 const animateExpanded = () => {
-    expandedAnimation = gsap.timeline({defaults: {ease: "power2.Out", duration:0.7}})
-    .from('#expand', { autoAlpha: 0 }, 'initial')
-    .from('#expand #logo', { autoAlpha: 0 }, 'initial')
-    .from('#expand', { '--radial-percentage-1': '15%', '--radial-opacity': '0%', '--radial-percentage-2': '15%', duration: 0.3 }, 'start')
-    .from('#expand #logo', { top: 225 }, 'start')
-    .from('#expand .ad-border', { autoAlpha: 0, duration: 0.01 })
-    .from('#expand .close-ad', { autoAlpha: 0 })
-    .from('#expand #title', { y: '+=100%', autoAlpha: 0 })
-    .from('#expand #subtitle', { y: '+=100%', autoAlpha: 0 })
-    .from('#expand #processImage', { autoAlpha: 0 })
+    // expandedAnimation = gsap.timeline({defaults: {ease: "power2.Out", duration:0.7}})
+    // .from('#expand', { autoAlpha: 0 }, 'initial')
+    // .from('#expand #logo', { autoAlpha: 0 }, 'initial')
+    // .from('#expand', { '--radial-percentage-1': '15%', '--radial-opacity': '0%', '--radial-percentage-2': '15%', duration: 0.3 }, 'start')
+    // .from('#expand #logo', { top: 225 }, 'start')
+    // .from('#expand .ad-border', { autoAlpha: 0, duration: 0.01 })
+    // .from('#expand .close-ad', { autoAlpha: 0 })
+    // .from('#expand #title', { y: '+=100%', autoAlpha: 0 })
+    // .from('#expand #subtitle', { y: '+=100%', autoAlpha: 0 })
+    // .from('#expand #processImage', { autoAlpha: 0 })
 }
 fireEvent(`${trackingUrl}?imp=expandableAd`);
-const gsapScript = document.createElement('script');
-gsapScript.src = 'https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js';
-acunx.element.appendChild(gsapScript);
-gsapScript.onload = function() {
+
+const filesCount = 2;
+let loadedFiles = 0;
+const fileLoaded = () => {
+    loadedFiles++;
+    if(loadedFiles !== filesCount) return;
     animateBanner();
 }
+addScript(acunx.element, 'https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js', fileLoaded);
+addScript(acunx.element, 'https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js', fileLoaded);
+
 
 acunx.element.onclick = function(event) {
     if(event.target.id === 'expandButton') { acunx.requestExpansion(); } 
