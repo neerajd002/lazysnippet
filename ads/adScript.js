@@ -391,7 +391,8 @@ const fileLoaded = () => {
     }, 1000);
 }
 const frameCount = 225;
-const currentFrame = (index) => `https://www.lazysnippet.com/ads/mobile-expandable/frames-webp/Frame_${index.toString().padStart(5, '0')}.webp`;
+// const currentFrame = (index) => `https://www.lazysnippet.com/ads/mobile-expandable/frames-webp/Frame_${index.toString().padStart(5, '0')}.webp`;
+const currentFrame = (index) => `https://www.lazysnippet.com/ads/mobile-expandable/frames/Frame_${index.toString().padStart(5, '0')}.png`;
 const images = [];
 
 for (let i = 0; i < frameCount; i++) {
