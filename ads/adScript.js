@@ -194,6 +194,7 @@ adContainer.innerHTML = `
         <div class="ad-container" tabindex="0">
             <canvas id="images"></canvas>
             <button id="expandButton">expand</button>
+            <div class="close-ad">&#10005;</div>
             <div class="overlay"></div>
         </div>
     </div>
@@ -283,12 +284,7 @@ const status_update = (status, data) => {
     else if(status == COLLAPSED) { 
         if(hasAdResized) return acunx.requestExpansion();
         acunx.collapseAd();
-        if(exp.t) {
-            document.documentElement.scrollTop = self.t - exp.t;
-        } else if(exp.b) {
-            document.documentElement.scrollTop = self.b - (win.h - exp.b);
-        }
-
+        
     } 
     else if (status == GEOM_UPDATE) {
         // update viewability
@@ -296,6 +292,12 @@ const status_update = (status, data) => {
             hasAdResized = true;
             acunx.requestCollapse();
             // acunx.expandAd();
+        } else {
+            if(exp.t) {
+                document.documentElement.scrollTop = self.t - exp.t;
+            } else if(exp.b) {
+                document.documentElement.scrollTop = self.b - (win.h - exp.b);
+            }
         }
     }
     else if (status == "failed") {
