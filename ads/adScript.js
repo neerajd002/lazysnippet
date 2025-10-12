@@ -267,7 +267,7 @@ const acunx = {
     collapseAd: () => {
         adScroll.enable();
         adContainer.dataset.ad = COLLAPSED;
-        scrollAnimation.play();
+        scrollAnimation.restart();
         // acunx.banner.element.focus();
         // expandedAnimation.progress(1);
         // show(acunx.banner.element);
