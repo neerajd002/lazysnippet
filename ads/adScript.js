@@ -366,6 +366,7 @@ addScript(acunx.element, 'https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min
 addScript(acunx.element, 'https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js', fileLoaded);
 
 function render() {
+    console.log('AcunX Ad - Render ', canvas);
     context.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
     context.drawImage(images[frames.frame], 0, 0, canvas.offsetWidth, canvas.offsetHeight);
 }
