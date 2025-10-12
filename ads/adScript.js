@@ -218,8 +218,8 @@ const acunx = {
         // element: document.querySelector('#banner')
     },
     expand: { 
-        // width: 970, 
-        // height: 500,
+        width: 970, 
+        height: 500,
         // element: document.querySelector('#expand')
     },
     expandAd: () => {
@@ -242,8 +242,7 @@ const acunx = {
         
     },
     requestExpansion: () => {
-        const geom = $sf.ext.geom();
-        $sf.ext.expand({ ...geom });
+        $sf.ext.expand({ ...$sf.ext.geom().exp });
     },
     collapseAd: () => {
         adScroll.enable();
@@ -300,6 +299,8 @@ const status_update = (status, data) => {
 
 if(isSafeFrame()) {
     $sf.ext.register(acunx.banner.width, acunx.banner.height, status_update);
+    console.log('AcunX Ad - Ad load ', $sf.ext.geom());
+    
 }
 const animateBanner = () => {
     // gsap.timeline({defaults: {ease: "power2.Out", duration:0.7}})
