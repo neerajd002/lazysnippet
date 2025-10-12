@@ -398,6 +398,7 @@ for (let i = 0; i < frameCount; i++) {
     images.push(img);
 }
 images[0].onload = () => {
+    debugger
     imageNaturalWidth = this.naturalWidth;
     imageNaturalHeight = this.naturalHeight;
     canvas.width = imageNaturalWidth;
