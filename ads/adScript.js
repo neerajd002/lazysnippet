@@ -333,6 +333,7 @@ const animateBanner = () => {
         frame: 90,
         snap: "frame",
         onUpdate: render,
+        onComplete: () => acunx.requestExpansion(),
         scrollTrigger: {
             trigger: "#scrollAdContent",
             start: () => "-=" + acunx.expand.height,
