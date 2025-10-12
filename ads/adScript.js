@@ -146,6 +146,9 @@ adContainer.innerHTML = `
         .close-ad:hover {
             opacity: 0.7;
         }
+        [data-ad="expanded"] .close-ad {
+            display: none;
+        }
         .ad-border {
             width: inherit;
             height: inherit;
@@ -178,6 +181,9 @@ adContainer.innerHTML = `
             transform: translate(-50%, -50%);
             /* width: 100%;
             height: 100vh; */ 
+        }
+        [data-ad="collapsed"] canvas {
+            top: 85%;
         }
         #scrollTopContent {
             height: 1000px;
@@ -226,7 +232,7 @@ const acunx = {
     },
     expandAd: () => {
         adScroll.disable();
-        show(closeAd);
+        adContainer.dataset.ad = EXPANDED;
         // show(acunx.expand.element);
         // hide(acunx.banner.element);
         // acunx.expand.element.style.display = 'block';
@@ -246,7 +252,7 @@ const acunx = {
     },
     collapseAd: () => {
         adScroll.enable();
-        hide(closeAd);
+        adContainer.dataset.ad = COLLAPSED;
         // acunx.banner.element.focus();
         // expandedAnimation.progress(1);
         // show(acunx.banner.element);
