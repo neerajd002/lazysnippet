@@ -97,7 +97,6 @@ adContainer.innerHTML = `
         body {
             margin: 0;
             padding: 0;
-            background-color: #fff;
         }
         .ad-wrapper {
             position: fixed;
@@ -109,6 +108,7 @@ adContainer.innerHTML = `
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            background-color: #fff;
             /* background-color: #00000080; */
         }
         .ad-container {
@@ -267,7 +267,7 @@ const acunx = {
     collapseAd: () => {
         adScroll.enable();
         adContainer.dataset.ad = COLLAPSED;
-        animateBanner();
+        scrollAnimation.play();
         // acunx.banner.element.focus();
         // expandedAnimation.progress(1);
         // show(acunx.banner.element);
@@ -340,7 +340,7 @@ const animateBanner = () => {
     // gsap.timeline({defaults: {ease: "power2.Out", duration:0.7}})
     gsap.to('.overlay', { autoAlpha: 0, delay: 1, ease: "power2.Out", duration: 0.7 });
     console.log('AcunX Ad - Animate Banner');
-    scrollAnimation && scrollAnimation.kill();
+    // scrollAnimation && scrollAnimation.kill();
     scrollAnimation = gsap.to(frames, {
         frame: 90,
         snap: "frame",
