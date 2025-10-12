@@ -193,6 +193,7 @@ adContainer.innerHTML = `
     <div class="ad-wrapper">
         <div class="ad-container" tabindex="0">
             <canvas id="images"></canvas>
+            <button id="expandButton">expand</button>
             <div class="overlay"></div>
         </div>
     </div>
