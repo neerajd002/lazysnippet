@@ -366,6 +366,7 @@ const trackingUrl = 'https://www.lazysnippet.com/ads/1x1.png';
 let hasAdResized = false;
 const status_update = (status, data) => {
     console.log('AcunX Ad - ', status, data);
+    console.log('AcunX Ad - status_update ', status, data, $sf.ext.geom());
     if(status == EXPANDED) {
         if(hasAdResized) {
             hasAdResized = false;
