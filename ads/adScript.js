@@ -77,6 +77,7 @@ function isSafeFrame() {
 }
 const adContainer = document.createElement('div');
 adContainer.id = 'adContainer';
+adContainer.dataset.ad = COLLAPSED;
 adContainer.innerHTML = `
     <style id="adStyles">
         :root {
@@ -211,6 +212,10 @@ adContainer.innerHTML = `
         </div>
     </div>
 `;
+const googleDiv = document.querySelector('#abgcp');
+if(googleDiv) {
+    googleDiv.style.position = 'fixed';
+}
 const adElement = document.querySelector("#acunx")
 adElement.appendChild(adContainer)
 
