@@ -298,7 +298,7 @@ if(isSafeFrame()) {
 }
 const animateBanner = () => {
     gsap.timeline({defaults: {ease: "power2.Out", duration:0.7}})
-    .to('#banner .overlay', { autoAlpha: 0, delay: 1 })
+    .to('.overlay', { autoAlpha: 0, delay: 1 })
     gsap.to(frames, {
         frame: 90,
         snap: "frame",
