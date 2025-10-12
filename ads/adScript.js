@@ -342,9 +342,12 @@ const animateBanner = () => {
         snap: "frame",
         onUpdate: () => {
             render()
-            if(frames.frame > 80) {
+            if(frames.frame > 70) {
                 scrollAnimation.pause();
-                acunx.requestExpansion();
+                setTimeout(() => {
+
+                    acunx.requestExpansion();
+                }, 500)
                 return
             }
         },
