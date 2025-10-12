@@ -309,7 +309,7 @@ const animateBanner = () => {
         onUpdate: render,
         scrollTrigger: {
             trigger: "#scrollAdContent",
-            start: () => "-=" + window.innerHeight,
+            start: () => "-=" + 667,
             scrub: 0.5,
             end: () => "+=" + document.querySelector("#scrollTopContent").offsetHeight
         },
