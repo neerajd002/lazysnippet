@@ -230,6 +230,7 @@ adElement.style.height = '';
 const closeAd = adElement.querySelector('.close-ad');
 let imageNaturalWidth;
 let imageNaturalHeight;
+let scrollAnimation;
 const acunx = {
     element: adElement,
     banner: { 
@@ -336,10 +337,17 @@ const animateBanner = () => {
     // gsap.timeline({defaults: {ease: "power2.Out", duration:0.7}})
     gsap.to('.overlay', { autoAlpha: 0, delay: 1, ease: "power2.Out", duration: 0.7 });
     console.log('AcunX Ad - Animate Banner');
-    gsap.to(frames, {
+    scrollAnimation = gsap.to(frames, {
         frame: 90,
         snap: "frame",
-        onUpdate: render,
+        onUpdate: () => {
+            render()
+            if(frames.frame > 80) {
+                scrollAnimation.pause();
+                acunx.requestExpansion();
+                return
+            }
+        },
         onComplete: () => acunx.requestExpansion(),
         scrollTrigger: {
             trigger: "#scrollAdContent",
