@@ -126,6 +126,7 @@ adContainer.innerHTML = `
             text-align: center;
             color: #fff;
             border: none;
+            padding: 10px;
             border-radius: 10px;
             background-color: #2e647c;
             cursor: pointer;
@@ -147,7 +148,7 @@ adContainer.innerHTML = `
         .close-ad:hover {
             opacity: 0.7;
         }
-        [data-ad="expanded"] .close-ad {
+        [data-ad="collapsed"] .close-ad {
             display: none;
         }
         .ad-border {
@@ -222,7 +223,6 @@ adElement.appendChild(adContainer)
 adElement.style.height = '';
 
 const closeAd = adElement.querySelector('.close-ad');
-hide(closeAd);
 const acunx = {
     element: adElement,
     banner: { 
