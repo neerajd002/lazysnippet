@@ -77,7 +77,7 @@
 
         
         // const currentFrame = (index) => `https://msk.stg.mindshaker.com/images/shadows/shadow_${index.toString()}.png`;
-        const clouds = {
+        const frames = {
             frame: 0
         };
 
@@ -89,7 +89,7 @@
         //
 
         document.addEventListener("DOMContentLoaded", (event) => {
-            gsap.to(clouds, {
+            gsap.to(frames, {
                 frame: 90,
                 snap: "frame",
                 onUpdate: render,
@@ -113,7 +113,7 @@
 
         function render() {
             context.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
-            context.drawImage(images[clouds.frame], 0, 0, canvas.offsetWidth, canvas.offsetHeight);
+            context.drawImage(images[frames.frame], 0, 0, canvas.offsetWidth, canvas.offsetHeight);
         }
     </script>
 </body>
