@@ -15,6 +15,11 @@ const commands = {
     'collapse': 'collapse'
 }
 
+const metaViewport = document.createElement('meta');
+metaViewport.setAttribute('name', 'viewport');
+metaViewport.setAttribute('content', 'width=device-width, initial-scale=1.0');
+document.head.appendChild(metaViewport);
+
 const adScroll = (() => {
     // left: 37, up: 38, right: 39, down: 40,
     // spacebar: 32, pageup: 33, pagedown: 34, end: 35, home: 36
