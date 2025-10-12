@@ -277,7 +277,7 @@ const acunx = {
         element: document.querySelector('#expand')
     },
     expandAd: () => {
-        disableScroll();
+        adScroll.disable();
         show(acunx.expand.element);
         hide(acunx.banner.element);
         acunx.expand.element.style.display = 'block';
@@ -345,7 +345,7 @@ const acunx = {
         $sf.ext.expand({ ...geom.exp });
     },
     collapseAd: () => {
-        enableScroll();
+        adScroll.enable();
         acunx.banner.element.focus();
         expandedAnimation.progress(1);
         show(acunx.banner.element);
