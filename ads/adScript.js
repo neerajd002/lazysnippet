@@ -161,109 +161,45 @@ adContainer.innerHTML = `
             background-color: #fff;
         }
     </style>
-    <style id="bannerStyles">
-        #banner {
-            width: 300px;
-            height: 250px;
-            background-image: radial-gradient(#0d1d23, #1b4352);
-            color: var(--text-color);
-            font-family: Arial, Helvetica, sans-serif;
-            cursor: pointer;
+    <style>
+        html::-webkit-scrollbar, body::-webkit-scrollbar{
+            display: none;
         }
-        #banner #logo {
-            top: 20px;
-            left: 20px;
-            width: 80px;
+        
+        html, body {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            overflow: hidden;
         }
-        #banner #logo img { width: inherit; }
-        #banner #title {
-            top: 92px;
-            left: 20px;
-            width: 260px;
-            height: 30px;
-            font-size: 22px;
-            text-transform: uppercase;
-            font-style: italic;
-            font-weight: bold;
-            text-align: center;
-        }
-        #banner #subtitle {
-            top: 150px;
-            left: 20px;
-            width: 260px;
-            height: 24px;
-            font-size: 16px;
-            text-align: center;
-        }
-        #banner button {
-            bottom: 24px;
-            left: 90px;
-            width: 120px;
-            height: 30px;
-        }
-    </style>
-    <style id="expandedStyles">
-        #expand {
-            max-width: 970px;
-            max-height: 500px;
-            background-image: radial-gradient(#0d1d23 var(--radial-percentage-1), rgb(27 67 82 / var(--radial-opacity)) var(--radial-percentage-2));
-            color: var(--text-color);
-            font-family: Arial, Helvetica, sans-serif;
-            cursor: pointer;
-        }
-        #expand #logo {
-            top: 18px;
+        canvas {
+            position: fixed;
+            top: 50%;
             left: 50%;
-            transform: translateX(-50%);
-        }
-        #expand #title {
-            top: 85px;
-            left: 50%;
-            width: 768px;
-            height: 50px;
-            font-size: 32px;
-            font-style: italic;
-            font-weight: bold;
-            text-align: center;
-            transform: translateX(-50%);
-        }
-        #expand #subtitle {
-            top: 133px;
-            left: 50%;
-            width: 700px;
-            height: 40px;
-            font-size: 18px;
-            line-height: 1.2;
-            text-align: center;
-            transform: translateX(-50%);
-        }
-        #expand #processImage {
-            bottom: 0;
-            width: inherit;
-            padding: 0 30px;
-            box-sizing: border-box;
-        }
-        #expand #processImage img {
+            transform: translate(-50%, -50%);
             width: 100%;
+            height: 100vh;
+        }
+        #scrollTopContent {
+            height: 1000px;
+        }
+        #scrollAdContent {
+            height: 250px;
+        }
+        #scrollBottomContent {
+            height: 1000px;
         }
     </style>
     <div class="ad-wrapper">
-        <div id="banner" class="ad-container" tabindex="0">
-            <div id="logo"><img src="https://www.lazysnippet.com/ads/logo.png" /></div>
-            <div id="title">Your programmatic deserves better ai</div>
-            <div id="subtitle">Let's reimagine it together</div>
-            <button id="expandButton">Explore more</button>
-            <div class="ad-border"></div>
+        <div class="ad-container" tabindex="0">
+            <canvas id="images"></canvas>
+            <div id="scrollWrapper">
+                <div id="scroller">
+                    <div id="scrollTopContent"></div>
+                    <div id="scrollAdContent"></div>
+                    <div id="scrollBottomContent"></div>
+                </div>
+            </div>
             <div class="overlay"></div>
-        </div>
-        <div id="expand" class="ad-container" tabindex="0">
-            <div id="logo"><img src="https://www.lazysnippet.com/ads/logo.png" /></div>
-            <div id="title">Driving Innovation Where It's Needed Most</div>
-            <div id="subtitle">A unified platform where media intelligence, creative innovation, and<br>AI-powered delivery come together to drive impactful storytelling</div>
-            <div id="processImage"><img src="https://www.lazysnippet.com/ads/process-flow.png" /></div>
-            <div class="close-ad">&#10005;</div>
-            <div class="ad-border"></div>
-            <!-- <div class="overlay"></div> -->
         </div>
     </div>
 `;
@@ -275,21 +211,21 @@ const acunx = {
     banner: { 
         width: 300, 
         height: 250,
-        element: document.querySelector('#banner')
+        // element: document.querySelector('#banner')
     },
     expand: { 
-        width: 970, 
-        height: 500,
-        element: document.querySelector('#expand')
+        // width: 970, 
+        // height: 500,
+        // element: document.querySelector('#expand')
     },
     expandAd: () => {
         adScroll.disable();
-        show(acunx.expand.element);
-        hide(acunx.banner.element);
-        acunx.expand.element.style.display = 'block';
-        acunx.expand.element.focus();
+        // show(acunx.expand.element);
+        // hide(acunx.banner.element);
+        // acunx.expand.element.style.display = 'block';
+        // acunx.expand.element.focus();
         if(expandedAnimation) {
-            expandedAnimation.restart();
+            // expandedAnimation.restart();
         } else {
             animateExpanded();
         }
@@ -302,18 +238,15 @@ const acunx = {
         
     },
     requestExpansion: () => {
-        const geom = $sf.ext.geom();
-        console.log('AcunX Ad - geom ', geom);
-        // $sf.ext.expand({ l: 100, r: -200, t: 100 });
-        $sf.ext.expand({ ...geom.exp });
+        $sf.ext.expand({ ...$sf.ext.geom() });
     },
     collapseAd: () => {
         adScroll.enable();
-        acunx.banner.element.focus();
-        expandedAnimation.progress(1);
-        show(acunx.banner.element);
-        hide(acunx.expand.element);
-        acunx.expand.element.style.display = 'none';
+        // acunx.banner.element.focus();
+        // expandedAnimation.progress(1);
+        // show(acunx.banner.element);
+        // hide(acunx.expand.element);
+        // acunx.expand.element.style.display = 'none';
     },
     requestCollapse: () => {
         if (!isSafeFrame()) {
@@ -364,7 +297,20 @@ if(isSafeFrame()) {
     $sf.ext.register(acunx.banner.width, acunx.banner.height, status_update);
 }
 const animateBanner = () => {
-    console.log("Ad Loaddeddddddddddddddddddd");
+    gsap.timeline({defaults: {ease: "power2.Out", duration:0.7}})
+    .to('#banner .overlay', { autoAlpha: 0, delay: 1 })
+    gsap.to(frames, {
+        frame: 90,
+        snap: "frame",
+        onUpdate: render,
+        scrollTrigger: {
+            trigger: "#scrollAdContent",
+            start: () => "-=" + window.innerHeight,
+            scrub: 0.5,
+            end: () => "+=" + document.querySelector("#scrollTopContent").offsetHeight
+        },
+        ease: "none"
+    });
     
     // gsap.timeline({defaults: {ease: "power2.Out", duration:0.7}})
     // .to('#banner .overlay', { autoAlpha: 0, delay: 1 })
@@ -388,15 +334,41 @@ const animateExpanded = () => {
 }
 fireEvent(`${trackingUrl}?imp=expandableAd`);
 
-const filesCount = 2;
+const canvas = document.getElementById("images");
+const context = canvas.getContext("2d");
+canvas.width = 375;
+canvas.height = 667;
+const frames = { frame: 0 };
+
+const filesCount = 3;
 let loadedFiles = 0;
 const fileLoaded = () => {
     loadedFiles++;
     if(loadedFiles !== filesCount) return;
+    gsap.registerPlugin(ScrollTrigger)
     animateBanner();
 }
+const frameCount = 225;
+const currentFrame = (index) => `https://www.lazysnippet.com/ads/mobile-expandable/frames-webp/Frame_${index.toString().padStart(5, '0')}.webp`;
+const images = [];
+
+for (let i = 0; i < frameCount; i++) {
+    const img = new Image();
+    img.loading="eager"
+    img.src = currentFrame(i);
+    images.push(img);
+}
+images[0].onload = () => {
+    fileLoaded();
+    render();
+};
 addScript(acunx.element, 'https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js', fileLoaded);
 addScript(acunx.element, 'https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js', fileLoaded);
+
+function render() {
+    context.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
+    context.drawImage(images[frames.frame], 0, 0, canvas.offsetWidth, canvas.offsetHeight);
+}
 
 
 acunx.element.onclick = function(event) {
