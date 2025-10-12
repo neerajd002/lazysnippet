@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Sequence</title>
+    <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100vh;
+        }
+        canvas {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <!-- <img src="../fujifilm/frames/Frame_00000.png" /> -->
+    <canvas id="images"></canvas>
+    <script>
+        const imageCount = 224;
+
+        // use a script tag or an external JS file
+        document.addEventListener("DOMContentLoaded", (event) => {
+            gsap.registerPlugin(ScrollTrigger)
+            // gsap code here!
+        });
+
+
+        const canvas = document.getElementById("images");
+        const context = canvas.getContext("2d");
+        console.clear();
+        canvas.width = 375;
+        canvas.height = 667;
+
+        const frameCount = 225;
+        // const currentFrame = (index) => `https://msk.stg.mindshaker.com/images/shadows/shadow_${index.toString()}.png`;
+        const currentFrame = (index) => `./frames-webp/Frame_${index.toString().padStart(5, '0')}.webp`;
+        const images = [];
+        const clouds = {
+            frame: 0
+        };
+
+        for (let i = 0; i < frameCount; i++) {
+            const img = new Image();
+            img.loading="eager"
+            img.src = currentFrame(i);
+            images.push(img);
+        }
+
+        const naturalWidth = 1080;
+        const naturalHeight = 1920;
+
+        // animation from prop -> frame: 0 -> 224
+        // steps ease between 0 - 224 = 224
+        //
+        // gsap.to(clouds, {
+        //     frame: frameCount - 1,
+        //     snap: "frame",
+        //     onUpdate: render,
+        //     repeat: -1,
+        //     duration: frameCount * (1/30),
+        //     ease: "steps(" + (frameCount - 2) + ")"
+        // });
+
+        images[0].onload = render;
+
+        function render() {
+            context.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
+            context.drawImage(images[clouds.frame], 0, 0, canvas.offsetWidth, canvas.offsetHeight);
+        }
+    </script>
+</body>
+</html>
