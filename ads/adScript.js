@@ -133,6 +133,7 @@ adContainer.innerHTML = `
             background-color: #2e647ccc;
         }
         .close-ad {
+            display: none;
             top: 12px;
             right: 12px;
             width: 20px;
@@ -141,7 +142,6 @@ adContainer.innerHTML = `
             font-size: 20px;
             line-height: 20px;
             text-align: center;
-            border: 1px solid var(--icon-color);
             border-radius: 50%;
         }
         .close-ad:hover {
@@ -211,6 +211,7 @@ adElement.appendChild(adContainer)
 
 adElement.style.height = '';
 
+const closeAd = adElement.querySelector('.close-ad');
 const acunx = {
     element: adElement,
     banner: { 
@@ -225,6 +226,7 @@ const acunx = {
     },
     expandAd: () => {
         adScroll.disable();
+        show(closeAd);
         // show(acunx.expand.element);
         // hide(acunx.banner.element);
         // acunx.expand.element.style.display = 'block';
@@ -238,15 +240,13 @@ const acunx = {
             console.log("Not in SafeFrame, collapse disabled.");
             return;
         }
-        
-
-        
     },
     requestExpansion: () => {
         $sf.ext.expand({ ...$sf.ext.geom().exp });
     },
     collapseAd: () => {
         adScroll.enable();
+        hide(closeAd);
         // acunx.banner.element.focus();
         // expandedAnimation.progress(1);
         // show(acunx.banner.element);
