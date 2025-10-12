@@ -376,6 +376,7 @@ const canvas = document.getElementById("images");
 canvas.width = acunx.expand.width;
 canvas.height = acunx.expand.height;
 const context = canvas.getContext("2d");
+context.imageSmoothingEnabled = false;
 const frames = { frame: 0 };
 
 const filesCount = 3;
