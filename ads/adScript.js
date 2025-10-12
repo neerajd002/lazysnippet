@@ -347,6 +347,7 @@ const fileLoaded = () => {
     loadedFiles++;
     if(loadedFiles !== filesCount) return;
     gsap.registerPlugin(ScrollTrigger)
+    render();
     animateBanner();
 }
 const frameCount = 225;
@@ -361,8 +362,6 @@ for (let i = 0; i < frameCount; i++) {
 }
 images[0].onload = () => {
     fileLoaded();
-    debugger
-    render();
 };
 addScript(acunx.element, 'https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js', fileLoaded);
 addScript(acunx.element, 'https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js', fileLoaded);
