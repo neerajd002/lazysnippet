@@ -343,7 +343,9 @@ const animateBanner = () => {
         onUpdate: () => {
             render()
             if(frames.frame > 70) {
-                scrollAnimation.pause();
+                scrollAnimation.kill();
+                console.log('AcunX Ad - expand');
+                
                 setTimeout(() => {
 
                     acunx.requestExpansion();
