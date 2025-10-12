@@ -228,6 +228,8 @@ adElement.appendChild(adContainer)
 adElement.style.height = '';
 
 const closeAd = adElement.querySelector('.close-ad');
+let imageNaturalWidth;
+let imageNaturalHeight;
 const acunx = {
     element: adElement,
     banner: { 
@@ -372,8 +374,6 @@ fireEvent(`${trackingUrl}?imp=expandableAd`);
 
 const canvas = document.getElementById("images");
 const context = canvas.getContext("2d");
-canvas.width = acunx.expand.width;
-canvas.height = acunx.expand.height;
 const frames = { frame: 0 };
 
 const filesCount = 3;
@@ -398,6 +398,10 @@ for (let i = 0; i < frameCount; i++) {
     images.push(img);
 }
 images[0].onload = () => {
+    imageNaturalWidth = this.naturalWidth;
+    imageNaturalHeight = this.naturalHeight;
+    canvas.width = imageNaturalWidth;
+    canvas.height = imageNaturalHeight;
     fileLoaded();
 };
 addScript(acunx.element, 'https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js', fileLoaded);
