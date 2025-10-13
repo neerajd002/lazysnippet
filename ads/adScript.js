@@ -289,6 +289,20 @@ const acunx = {
 let expandedAnimation;
 const trackingUrl = 'https://www.lazysnippet.com/ads/1x1.png';
 
+let scrollTopValue = 0;
+setInterval(function() {
+    if(!isSafeFrame()) return;
+    const geom = $sf.ext.geom();
+    const { exp, win, self } = geom;
+    let lastScrollTopValue = scrollTopValue;
+    if(exp.t) {
+        scrollTopValue = self.t - exp.t;
+    } else if(exp.b) {
+        scrollTopValue = self.b - (win.h - exp.b);
+    }
+    if(lastScrollTopValue !== scrollTopValue) console.log('AcunX Ad - Scroll update ', scrollTopValue)
+}, 10);
+
 let hasAdResized = false;
 let scrollExpansion = false
 const status_update = (status, data) => {
