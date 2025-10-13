@@ -359,7 +359,7 @@ const animateBanner = () => {
         scrollTrigger: {
             trigger: "#scrollAdContent",
             start: () => "-=" + (acunx.expand.height - acunx.banner.height),
-            scrub: 0.1,
+            scrub: 0.5,
             end: () => "+=" + (acunx.expand.height*0.75 - acunx.banner.height)
         },
         ease: "none"
