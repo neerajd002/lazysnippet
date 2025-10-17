@@ -34,11 +34,15 @@
         .barakhadi-viewer {
             font-size: 6vw;
         }
-        .action-button {
+        .action-container {
             position: absolute;
+            width: 100%;
             bottom: 0;
+            display: flex;
+        }
+        .action-button {
+            width: 50%;
             font-size: 4rem;
-            padding: 2rem 4rem;
             color: var(--text-color);
             background-color: var(--button-background);
             cursor: pointer;
@@ -62,8 +66,10 @@
 <body>
     <div class="counter">1</div>
     <div class="barakhadi-viewer"></div>
-    <button class="action-button prev">&#8249;</button>
-    <button class="action-button next">&#8250;</button>
+    <div class="action-container">
+        <button class="action-button prev">&#8249;</button>
+        <button class="action-button next">&#8250;</button>
+    </div>
     <script src="barakhadi.js"></script>
     <script>
         const counterText = document.querySelector('.counter');
