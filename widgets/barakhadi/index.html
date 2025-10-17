@@ -81,13 +81,13 @@
         let index = 0;
         const length = barakhadi.length;
         prevButton.disabled = true;
-        console.log(barakhadi)
         function renderText() {
             counterText.textContent = counter;
             barakhadiText.textContent = barakhadi[index].join(' ');
         }
         renderText();
-        prevButton.onclick = () => {
+        const goBack = () => {
+            if(index == 0 && counter == 1) return;
             if(index == 0) {
                 index = length;
                 counter--;
@@ -96,7 +96,7 @@
             renderText();
             if(index == 0 && counter == 1) prevButton.disabled = true;
         }
-        nextButton.onclick = () => {
+        const goForward = () => {
             if(prevButton.disabled) prevButton.disabled = false;
             if(index == length) {
                 index = -1;
@@ -104,6 +104,18 @@
             }
             index++;
             renderText();
+        }
+        prevButton.onclick = goBack;
+        nextButton.onclick = goForward;
+        document.onkeydown = (e) => {
+            const key = e.key;
+            const prevKeys = ['ArrowDown', 'ArrowLeft', 'Escape'];
+            const nextKeys = ['ArrowUp', 'ArrowRight', ' ', 'Enter'];
+            if(nextKeys.includes(key)) {
+                goForward();
+            } else if(prevKeys.includes(key)) {
+                goBack();
+            }
         }
     </script>
 </body>
