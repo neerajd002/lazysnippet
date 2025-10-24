@@ -127,6 +127,45 @@
             margin-left: -1px;
             border: 1px solid var(--grey-2);
         }
+        @media only screen and (max-width: 600px) {
+            .left-panel {
+                display: none;
+            }
+            .main {
+                width: 100%;
+            }
+            .right-panel {
+                display: none;
+            }
+        }
+
+        @media only screen and (min-width: 600px) {
+            .left-panel {
+                display: none;
+            }
+            .main {
+                width: 70%;
+            }
+            .right-panel {
+                display: block;
+                width: 30%;
+            }
+        }
+
+        @media only screen and (min-width: 768px) {
+            .left-panel {
+                display: block;
+                width: 20%;
+            }
+            .main {
+                width: 50%;
+            }
+            .right-panel {
+                display: block;
+                width: 30%;
+            }
+        }
+        
     </style>
 </head>
 <body>
@@ -145,7 +184,7 @@
         <div class="color-block" style="height: 40px;"></div>
         <div style="height: 40px;"></div>
         <main class="flex">
-            <aside class="w-20">
+            <aside class="left-panel">
                 <section>
                     <div class="block-text line-1"></div>
                     <div class="block-text"></div>
@@ -230,7 +269,7 @@
                 </section>
                 <hr>
             </aside>
-            <article class="w-50" style="margin: 0.5rem 2rem;">
+            <article class="main" style="margin: 0.5rem 2rem;">
                 <section>
                     <div class="block-image"></div>
                     <div class="block-text line-2"></div>
@@ -335,7 +374,7 @@
                 </section>
                 <hr>
             </article>
-            <aside class="w-30">
+            <aside class="right-panel">
                 <section>
                     <div class="block-text line-1"></div>
                     <div class="block-text"></div>
@@ -400,7 +439,7 @@
             </div>
         </section>
         <section class="flex">
-            <aside class="w-20">
+            <aside class="left-panel">
                 <section>
                     <div class="block-text line-1"></div>
                     <div class="block-text"></div>
@@ -485,7 +524,7 @@
                 </section>
                 <hr>
             </aside>
-            <article class="w-50" style="margin: 0.5rem 2rem;">
+            <article class="main" style="margin: 0.5rem 2rem;">
                 <section>
                     <div class="block-image"></div>
                     <div class="block-text line-2"></div>
@@ -590,7 +629,7 @@
                 </section>
                 <hr>
             </article>
-            <aside class="w-30">
+            <aside class="right-panel">
                 <section>
                     <div class="block-text line-1"></div>
                     <div class="block-text"></div>
