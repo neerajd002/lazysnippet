@@ -2,7 +2,7 @@
         <div class="bg"></div>
             <div class="content">
                 <div class="logo">
-                    <img src="./logo.png" />
+                    <img src="https://www.lazysnippet.com/ads/interscroller/logo.png" />
                 </div>
                 <div class="text">
                     Your programmatic<br>deserves better ai<br>Let's reimagine it together
@@ -52,7 +52,7 @@
         height: 100%;
     }`,".bg":`{
         background-color: var(--ad-bg-1);
-        background-image: url(./hero_banner.jpeg);
+        background-image: url(https://www.lazysnippet.com/ads/interscroller/hero_banner.jpeg);
         background-size: cover;
         background-position: top;
         opacity: 0.6;
