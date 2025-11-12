@@ -1,0 +1,16 @@
+<div id="acunx">
+    <img src="%%VIEW_URL_UNESC%%" width="0" height="0" style="display: none" />
+    <script type="text/javascript">
+        const cacheBuster = "%%CACHEBUSTER%%";
+        const adClickUrl = "%%CLICK_URL_UNESC%%";
+    </script>
+    <script>
+        const adContainer = document.querySelector('#acunx');
+        const iframe = document.createElement('iframe');
+        Object.assign(iframe, { width: '300px', height: '250px', frameBorder: '0', src: 'https://lazysnippet.com/ads/cube/cube.html' })
+        adContainer.appendChild(iframe);
+    </script>
+    <noscript>
+        <img src="https://www.lazysnippet.com/ads/fallbackAd.png" />
+    </noscript>
+</div>
