@@ -44,7 +44,7 @@
         }
         .close-ad {
             top: 12px;
-            right: 12px;
+            right: 20px;
             width: 20px;
             height: 20px;
             padding: 5px;
@@ -84,8 +84,8 @@
             background-image: radial-gradient(#0d1d23 var(--radial-percentage-1), rgb(27 67 82 / var(--radial-opacity)) var(--radial-percentage-2));
         }
         #acunexusExpandedAd {
-            width: 1382px;
-            height: 730px;
+            width: 970px;
+            height: 500px;
             display: none;
         }
         #logo {
@@ -93,33 +93,53 @@
             left: 50%;
             transform: translateX(-50%);
         }
-        #title {
-            top: 143px;
-            left: 50%;
-            width: 768px;
-            height: 50px;
-            font-size: 36px;
-            font-style: italic;
-            font-weight: bold;
-            text-align: center;
-            transform: translateX(-50%);
-        }
-        #subtitle {
-            top: 195px;
-            left: 50%;
-            width: 700px;
-            height: 40px;
-            font-size: 20px;
-            line-height: 1.2;
-            text-align: center;
-            transform: translateX(-50%);
-        }
-        #processImage {
-            bottom: 0;
-            width: inherit;
-        }
-        #processImage img {
+        .block{
+            top: 0;
+            left: 0;
             width: 100%;
+            height: 100%;
+        }
+        .bg {
+            background-color: #10232d;
+            background-image: url(https://www.lazysnippet.com/ads/interscroller/hero_banner.jpeg);
+            background-size: cover;
+            background-position: top;
+            opacity: 0.6;
+        }
+        .bg::before {
+            content: "";
+            background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0) -27%, #10232D 85%);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            gap: 1rem;
+        }
+        .description {
+            font-size: 2rem;
+            text-shadow: 0 0 20px #00000075;
+            padding: 2rem 10%;
+            font-weight: bold;
+            color: #ddd;
+        }
+        .cta {
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            background: white;
+            transition: scale ease 0.2s;
+            color: #316F84;
+            cursor: pointer;
+        }
+        .cta:hover {
+            scale: 1.03;
         }
     </style>
     <style id="bannerStyles">
@@ -167,7 +187,7 @@
 </head>
 <body>
     <div id="banner" class="ad-container">
-        <div id="logo"><img src="./logo.png" /></div>
+        <div id="logo"><img src="https://www.lazysnippet.com/ads/expandable/desktop/logo.png" /></div>
         <div id="title">Your programmatic deserves better ai</div>
         <div id="subtitle">Let's reimagine it together</div>
         <button id="expandButton">Explore more</button>
@@ -175,10 +195,16 @@
         <div class="overlay"></div>
     </div>
     <div id="expand" class="ad-container">
-        <div id="logo"><img src="./logo.png" /></div>
-        <div id="title">Driving Innovation Where It's Needed Most</div>
-        <div id="subtitle">A unified platform where media intelligence, creative innovation, and<br>AI-powered delivery come together to drive impactful storytelling</div>
-        <div id="processImage"><img src="./process-flow.png" /></div>
+        <div class="bg block"></div>
+        <div class="content block">
+            <div class="logo">
+                <img src="https://www.lazysnippet.com/ads/expandable/desktop/logo.png" />
+            </div>
+            <div class="description">
+                Your programmatic<br>deserves better ai<br>Let's reimagine it together
+            </div>
+            <div class="cta">Get Started</div>
+        </div>
         <div class="close-ad">✕</div>
         <div class="ad-border"></div>
         <!-- <div class="overlay"></div> -->
@@ -191,7 +217,7 @@
             iframeContainer.style.visibility = 'hidden';
         }
         const loadAd = () => {
-            fireEvent('1x1.png?imp=expandableAd');
+            fireEvent('https://www.lazysnippet.com/ads/expandable/desktop/1x1.png?imp=expandableAd');
             console.log('ad loaded');
             iframeWrapper = document.createElement('div');
             setStyles([iframeWrapper], {
@@ -220,8 +246,8 @@
             const expandContainer = getElement('#expand');
             iframe = document.createElement('iframe');
             setStyles([iframe], {
-                width: '1382px',
-                height: '730px',
+                width: '970px',
+                height: '500px',
                 // background: 'white',
                 // border: '1px solid'
             });
@@ -243,11 +269,22 @@
                 iframe.contentWindow.document.body.onclick = function(event) {
                     if(event.target.classList.contains('close-ad')) {} else {
                         const clickUrl = 'http://acunexus.com/';
-                        fireEvent(`1x1.png?click=${encodeURI(clickUrl)}`);
+                        fireEvent(`https://www.lazysnippet.com/ads/expandable/desktop/1x1.png?click=${encodeURI(clickUrl)}`);
                         window.open(clickUrl, '_blank');
                     }
                 }
             }
+            function updateSize() {
+                if(window.top.innerWidth < 970) {
+                    iframe.style.width = window.top.innerWidth + 'px';
+                    iframe.style.height = window.top.innerHeight + 'px';
+                } else {
+                    iframe.style.width = '970px';
+                    iframe.style.height = '500px';
+                }
+            }
+            updateSize()
+            window.top.addEventListener('resize', updateSize)
             animateBanner();
         }
         const animateBanner = () => {
@@ -263,19 +300,16 @@
             const el = (selector) => iframe.contentWindow.document.querySelector(selector);
             expandedAnimation = gsap.timeline({defaults: {ease: "power2.Out", duration:0.7}})
             .from(el('body'), { autoAlpha: 0 }, 'initial')
-            .from(el('#expand #logo'), { autoAlpha: 0 }, 'initial')
-            .from(el('body'), { '--radial-percentage-1': '10%', '--radial-opacity': '0%', '--radial-percentage-2': '10%', duration: 0.3 }, 'start')
-            .from(el('#expand #logo'), { top: 341 }, 'start')
+            .from(el('#expand .logo'), { autoAlpha: 0 })
             .from(el('#expand .ad-border'), { autoAlpha: 0, duration: 0.01 })
             .from(el('#expand .close-ad'), { autoAlpha: 0 })
-            .from(el('#expand #title'), { y: '+=100%', autoAlpha: 0 })
-            .from(el('#expand #subtitle'), { y: '+=100%', autoAlpha: 0 })
-            .from(el('#expand #processImage'), { autoAlpha: 0 })
+            .from(el('#expand .description'), { y: '+=100%', autoAlpha: 0 })
+            .from(el('#expand .cta'), { autoAlpha: 0 })
         }
         getElement('#banner').onclick = function(event) {
             if(event.target.id === 'expandButton') {} else {
                 const clickUrl = 'http://acunexus.com/';
-                fireEvent(`1x1.png?click=${encodeURI(clickUrl)}`);
+                fireEvent(`https://www.lazysnippet.com/ads/expandable/desktop/1x1.png?click=${encodeURI(clickUrl)}`);
                 window.open(clickUrl, '_blank');
             }
         }
