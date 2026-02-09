@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <title>index</title>
+    <style>body { margin: 0; padding: 0; overflow: hidden; }</style>
+    <script>
+        // Standard IAB/GAM Macros
+        var clickTag = "%%CLICK_URL_UNESC%%"; 
+        var clickUrl = "%%CLICK_URL_UNESC%%"; 
+        var cacheBuster = "%%CACHEBUSTER%%"; 
+        var impression = "%%VIEW_URL_UNESC%%"; 
+        
+        // Custom User-Defined Macros (Requires setup in GAM creative settings)
+        var customClick = "%%CUSTOM_CLICK%%"; 
+        var renderingMode = "%%RENDERING_MODE%%"; 
+        
+        // Additional trackers (e.g. for multiple custom actions)
+        var tracker1 = "%%TRACKER1%%";
+        var tracker2 = "%%TRACKER2%%";
+        var tracker3 = "%%TRACKER3%%";
+    </script>
+</head>
+<body>
+    <script src="https://www.lazysnippet.com/ads/carousel/970x250/index.js"></script>
+</body>
+</html>
