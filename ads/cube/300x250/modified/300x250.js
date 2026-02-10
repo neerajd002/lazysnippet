@@ -15,17 +15,17 @@
         },
         {
           id: "slide2",
-          image: "https://www.lazysnippet.com/ads/cube/300x250/300x250-light-03.jpg",
+          image: "https://www.lazysnippet.com/ads/cube/300x250/300x250-dark-03.jpg",
           url: "http://acunexus.com/#slide2",
         },
         {
           id: "slide3",
-          image: "https://www.lazysnippet.com/ads/cube/300x250/300x250-dark-02.jpg",
+          image: "https://www.lazysnippet.com/ads/cube/300x250/300x250-light-03.jpg",
           url: "http://acunexus.com/#slide3",
         },
         {
           id: "slide4",
-          image: "https://www.lazysnippet.com/ads/cube/300x250/300x250-dark-03.jpg",
+          image: "https://www.lazysnippet.com/ads/cube/300x250/300x250-dark-02.jpg",
           url: "http://acunexus.com/#slide4",
         },
       ];
