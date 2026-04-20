@@ -4,8 +4,8 @@
     <InLine>
       <AdSystem>AntigravityLocal</AdSystem>
       <AdTitle>SIMID Overlay Ad</AdTitle>
-      <Error><![CDATA[https://lazysnippet.com/ads/ctv/vast-simid-overlay/error]]></Error>
-      <Impression id="Imp_01"><![CDATA[https://lazysnippet.com/ads/ctv/vast-simid-overlay/impression]]></Impression>
+      <Error><![CDATA[https://www.lazysnippet.com/ads/ctv/vast-simid-overlay/error]]></Error>
+      <Impression id="Imp_01"><![CDATA[https://www.lazysnippet.com/ads/ctv/vast-simid-overlay/impression]]></Impression>
       <Creatives>
         <Creative>
           <Linear>
@@ -15,7 +15,7 @@
                 <![CDATA[https://storage.googleapis.com/gvabox/media/samples/stock.mp4]]>
               </MediaFile>
               <InteractiveCreativeFile type="text/html" apiFramework="SIMID" variableDuration="false">
-                <![CDATA[https://lazysnippet.com/ads/ctv/vast-simid-overlay/]]>
+                <![CDATA[https://www.lazysnippet.com/ads/ctv/vast-simid-overlay/]]>
               </InteractiveCreativeFile>
             </MediaFiles>
           </Linear>
