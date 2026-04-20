@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VAST version="4.2" xmlns="http://www.iab.com/VAST">
+  <Ad id="Interactive_CTV_01">
+    <InLine>
+      <AdSystem>AntigravityLocal</AdSystem>
+      <AdTitle>SIMID Overlay Ad</AdTitle>
+      <Error><![CDATA[https://lazysnippet.com/ads/ctv/vast-simid-overlay/error]]></Error>
+      <Impression id="Imp_01"><![CDATA[https://lazysnippet.com/ads/ctv/vast-simid-overlay/impression]]></Impression>
+      <Creatives>
+        <Creative>
+          <Linear>
+            <Duration>00:01:00</Duration>
+            <MediaFiles>
+              <MediaFile delivery="progressive" type="video/mp4" width="1920" height="1080">
+                <![CDATA[https://storage.googleapis.com/gvabox/media/samples/stock.mp4]]>
+              </MediaFile>
+              <InteractiveCreativeFile type="text/html" apiFramework="SIMID" variableDuration="false">
+                <![CDATA[https://lazysnippet.com/ads/ctv/vast-simid-overlay/]]>
+              </InteractiveCreativeFile>
+            </MediaFiles>
+          </Linear>
+        </Creative>
+      </Creatives>
+    </InLine>
+  </Ad>
+</VAST>
